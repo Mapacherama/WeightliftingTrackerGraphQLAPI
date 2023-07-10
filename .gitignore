@@ -1,0 +1,34 @@
+# Visual Studio / Visual Studio Code
+.vs/
+.vscode/
+
+# NuGet
+*.nuget.*
+*.nupkg
+**/packages/
+
+# Build results
+/bin/
+/obj/
+
+# User-specific files
+*.user
+*.suo
+*.userprefs
+*.vspscc
+*.vssscc
+*.cache
+
+# Test Results
+*.trx
+TestResults/
+[Oo]ut/
+
+# GraphQL
+**/Generated/
+**/HotChocolate/
+
+# Other
+*.log
+.DS_Store
+Thumbs.db
