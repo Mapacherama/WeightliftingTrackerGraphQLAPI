@@ -43,8 +43,6 @@ C:\Users\Administrator\Documents\GitHub\WeightliftingTrackerGraphQLAPI\Weightlif
 C:\Users\Administrator\Documents\GitHub\WeightliftingTrackerGraphQLAPI\WeightliftingTrackerGraphQLAPI\bin\Debug\net6.0\GreenDonut.dll
 C:\Users\Administrator\Documents\GitHub\WeightliftingTrackerGraphQLAPI\WeightliftingTrackerGraphQLAPI\bin\Debug\net6.0\HotChocolate.Abstractions.dll
 C:\Users\Administrator\Documents\GitHub\WeightliftingTrackerGraphQLAPI\WeightliftingTrackerGraphQLAPI\bin\Debug\net6.0\HotChocolate.AspNetCore.dll
-C:\Users\Administrator\Documents\GitHub\WeightliftingTrackerGraphQLAPI\WeightliftingTrackerGraphQLAPI\bin\Debug\net6.0\HotChocolate.AspNetCore.Abstractions.dll
-C:\Users\Administrator\Documents\GitHub\WeightliftingTrackerGraphQLAPI\WeightliftingTrackerGraphQLAPI\bin\Debug\net6.0\HotChocolate.AspNetCore.Voyager.dll
 C:\Users\Administrator\Documents\GitHub\WeightliftingTrackerGraphQLAPI\WeightliftingTrackerGraphQLAPI\bin\Debug\net6.0\HotChocolate.Authorization.dll
 C:\Users\Administrator\Documents\GitHub\WeightliftingTrackerGraphQLAPI\WeightliftingTrackerGraphQLAPI\bin\Debug\net6.0\HotChocolate.Execution.dll
 C:\Users\Administrator\Documents\GitHub\WeightliftingTrackerGraphQLAPI\WeightliftingTrackerGraphQLAPI\bin\Debug\net6.0\HotChocolate.Execution.Abstractions.dll
@@ -54,7 +52,6 @@ C:\Users\Administrator\Documents\GitHub\WeightliftingTrackerGraphQLAPI\Weightlif
 C:\Users\Administrator\Documents\GitHub\WeightliftingTrackerGraphQLAPI\WeightliftingTrackerGraphQLAPI\bin\Debug\net6.0\HotChocolate.Language.Utf8.dll
 C:\Users\Administrator\Documents\GitHub\WeightliftingTrackerGraphQLAPI\WeightliftingTrackerGraphQLAPI\bin\Debug\net6.0\HotChocolate.Language.Visitors.dll
 C:\Users\Administrator\Documents\GitHub\WeightliftingTrackerGraphQLAPI\WeightliftingTrackerGraphQLAPI\bin\Debug\net6.0\HotChocolate.Language.Web.dll
-C:\Users\Administrator\Documents\GitHub\WeightliftingTrackerGraphQLAPI\WeightliftingTrackerGraphQLAPI\bin\Debug\net6.0\HotChocolate.Server.dll
 C:\Users\Administrator\Documents\GitHub\WeightliftingTrackerGraphQLAPI\WeightliftingTrackerGraphQLAPI\bin\Debug\net6.0\HotChocolate.Subscriptions.dll
 C:\Users\Administrator\Documents\GitHub\WeightliftingTrackerGraphQLAPI\WeightliftingTrackerGraphQLAPI\bin\Debug\net6.0\HotChocolate.Subscriptions.InMemory.dll
 C:\Users\Administrator\Documents\GitHub\WeightliftingTrackerGraphQLAPI\WeightliftingTrackerGraphQLAPI\bin\Debug\net6.0\HotChocolate.Transport.Sockets.dll
