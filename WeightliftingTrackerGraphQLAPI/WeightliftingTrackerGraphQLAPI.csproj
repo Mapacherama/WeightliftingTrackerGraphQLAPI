@@ -20,6 +20,8 @@
   <ItemGroup>
     <PackageReference Include="HotChocolate.AspNetCore" Version="13.3.1" />
     <PackageReference Include="MySql.Data" Version="8.0.33" />
+    <PackageReference Include="NUnit" Version="3.13.3" />
+	 <PackageReference Include="NUnit3TestAdapter" Version="4.2.0" />
   </ItemGroup>
 
   <ItemGroup>
