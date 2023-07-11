@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.6.33815.320
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WeightliftingTrackerGraphQLAPI", "WeightliftingTrackerGraphQLAPI\WeightliftingTrackerGraphQLAPI.csproj", "{7F69705E-619D-4560-91AB-8EFD8BC513EE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WeightliftingTrackerGraphQLAPI", "WeightliftingTrackerGraphQLAPI\WeightliftingTrackerGraphQLAPI.csproj", "{7F69705E-619D-4560-91AB-8EFD8BC513EE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WeightliftingTrackerGraphQLAPI.Data", "WeightliftingTrackerGraphQLAPI.Data\WeightliftingTrackerGraphQLAPI.Data.csproj", "{6C462444-E652-4A9D-AAEA-A5702F2B915F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{7F69705E-619D-4560-91AB-8EFD8BC513EE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7F69705E-619D-4560-91AB-8EFD8BC513EE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7F69705E-619D-4560-91AB-8EFD8BC513EE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6C462444-E652-4A9D-AAEA-A5702F2B915F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6C462444-E652-4A9D-AAEA-A5702F2B915F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6C462444-E652-4A9D-AAEA-A5702F2B915F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6C462444-E652-4A9D-AAEA-A5702F2B915F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
