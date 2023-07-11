@@ -1,0 +1,12 @@
+C:\Users\Administrator\Documents\GitHub\WeightliftingTrackerGraphQLAPI\WeightliftingTrackerGraphQLAPI.Data\bin\Debug\net6.0\WeightliftingTrackerGraphQLAPI.Data.deps.json
+C:\Users\Administrator\Documents\GitHub\WeightliftingTrackerGraphQLAPI\WeightliftingTrackerGraphQLAPI.Data\bin\Debug\net6.0\WeightliftingTrackerGraphQLAPI.Data.dll
+C:\Users\Administrator\Documents\GitHub\WeightliftingTrackerGraphQLAPI\WeightliftingTrackerGraphQLAPI.Data\bin\Debug\net6.0\WeightliftingTrackerGraphQLAPI.Data.pdb
+C:\Users\Administrator\Documents\GitHub\WeightliftingTrackerGraphQLAPI\WeightliftingTrackerGraphQLAPI.Data\obj\Debug\net6.0\WeightliftingTrackerGraphQLAPI.Data.csproj.AssemblyReference.cache
+C:\Users\Administrator\Documents\GitHub\WeightliftingTrackerGraphQLAPI\WeightliftingTrackerGraphQLAPI.Data\obj\Debug\net6.0\WeightliftingTrackerGraphQLAPI.Data.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Administrator\Documents\GitHub\WeightliftingTrackerGraphQLAPI\WeightliftingTrackerGraphQLAPI.Data\obj\Debug\net6.0\WeightliftingTrackerGraphQLAPI.Data.AssemblyInfoInputs.cache
+C:\Users\Administrator\Documents\GitHub\WeightliftingTrackerGraphQLAPI\WeightliftingTrackerGraphQLAPI.Data\obj\Debug\net6.0\WeightliftingTrackerGraphQLAPI.Data.AssemblyInfo.cs
+C:\Users\Administrator\Documents\GitHub\WeightliftingTrackerGraphQLAPI\WeightliftingTrackerGraphQLAPI.Data\obj\Debug\net6.0\WeightliftingTrackerGraphQLAPI.Data.csproj.CoreCompileInputs.cache
+C:\Users\Administrator\Documents\GitHub\WeightliftingTrackerGraphQLAPI\WeightliftingTrackerGraphQLAPI.Data\obj\Debug\net6.0\WeightliftingTrackerGraphQLAPI.Data.dll
+C:\Users\Administrator\Documents\GitHub\WeightliftingTrackerGraphQLAPI\WeightliftingTrackerGraphQLAPI.Data\obj\Debug\net6.0\refint\WeightliftingTrackerGraphQLAPI.Data.dll
+C:\Users\Administrator\Documents\GitHub\WeightliftingTrackerGraphQLAPI\WeightliftingTrackerGraphQLAPI.Data\obj\Debug\net6.0\WeightliftingTrackerGraphQLAPI.Data.pdb
+C:\Users\Administrator\Documents\GitHub\WeightliftingTrackerGraphQLAPI\WeightliftingTrackerGraphQLAPI.Data\obj\Debug\net6.0\ref\WeightliftingTrackerGraphQLAPI.Data.dll
