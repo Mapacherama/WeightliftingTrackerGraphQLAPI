@@ -7,6 +7,5 @@
         public int Sets { get; set; }
         public int Reps { get; set; }
         public decimal Weight { get; set; }
-        // Add additional properties as needed
     }
 }
