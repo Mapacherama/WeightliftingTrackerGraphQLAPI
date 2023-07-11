@@ -1,8 +1,10 @@
-using Microsoft.AspNetCore.Builder;
-using Microsoft.Extensions.DependencyInjection;
 using WeightliftingTrackerGraphQLAPI.GraphQL;
 
 var builder = WebApplication.CreateBuilder(args);
+
+string connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+
+builder.Services.AddSingleton(x => new WeightliftingTrackerGraphQLAPI.Data.MySqlDataAccess(connectionString));
 
 // Add services to the container.
 builder.Services.AddControllers();

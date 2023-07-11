@@ -1942,7 +1942,11 @@
         "type": "project",
         "framework": ".NETCoreApp,Version=v6.0",
         "dependencies": {
-          "HotChocolate.AspNetCore": "13.3.1"
+          "HotChocolate.AspNetCore": "13.3.1",
+          "MySql.Data": "8.0.33",
+          "NUnit": "3.13.3",
+          "NUnit3TestAdapter": "4.2.0",
+          "WeightliftingTrackerGraphQLAPI.Data": "1.0.0"
         },
         "compile": {
           "bin/placeholder/WeightliftingTrackerGraphQLAPI.dll": {}
