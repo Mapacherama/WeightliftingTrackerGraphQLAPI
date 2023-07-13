@@ -1,8 +1,7 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using WeightliftingTrackerGraphQLAPI.Models;
-using WeightliftingTrackerGraphQLAPI.Data;
+﻿using MySql.Data.MySqlClient;
 using System.Data;
+using WeightliftingTrackerGraphQLAPI.Data;
+using WeightliftingTrackerGraphQLAPI.Models;
 
 namespace WeightliftingTrackerGraphQLAPI.Resolvers
 {
@@ -17,7 +16,10 @@ namespace WeightliftingTrackerGraphQLAPI.Resolvers
 
         public IEnumerable<Workout> GetWorkouts()
         {
-            DataTable dt = _dataAccess.ExecuteQuery("SELECT * FROM Workouts");
+            string query = "SELECT * FROM Workouts";
+            MySqlParameter[] parameters = null; // You can add parameters if needed.
+
+            DataTable dt = _dataAccess.ExecuteQuery(query, parameters);
 
             List<Workout> workouts = new List<Workout>();
 
@@ -36,5 +38,26 @@ namespace WeightliftingTrackerGraphQLAPI.Resolvers
 
             return workouts;
         }
+
+        public Workout CreateWorkout(Workout newWorkout)
+        {
+            string sqlQuery = "INSERT INTO Workouts (ExerciseName, Sets, Reps, Weight) VALUES (@ExerciseName, @Sets, @Reps, @Weight);";
+
+            MySqlParameter[] parameters = new MySqlParameter[]
+        {
+            new MySqlParameter("@ExerciseName", newWorkout.ExerciseName),
+            new MySqlParameter("@Sets", newWorkout.Sets),
+            new MySqlParameter("@Reps", newWorkout.Reps),
+            new MySqlParameter("@Weight", newWorkout.Weight)
+        };
+
+            _dataAccess.ExecuteQuery(sqlQuery, parameters);
+
+            // Assuming MySqlDataAccess.ExecuteQuery returns the ID of the inserted record.
+            newWorkout.Id = Convert.ToInt32(_dataAccess.ExecuteScalar(sqlQuery, parameters));
+
+            return newWorkout;
+        }
+
     }
 }

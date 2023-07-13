@@ -1,4 +1,5 @@
 using WeightliftingTrackerGraphQLAPI.GraphQL;
+using WeightliftingTrackerGraphQLAPI.GraphQL.Types;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -10,7 +11,8 @@ builder.Services.AddSingleton(x => new WeightliftingTrackerGraphQLAPI.Data.MySql
 builder.Services.AddControllers();
 builder.Services.AddGraphQLServer()
     .AddQueryType<Query>()
-    .AddMutationType<Mutation>();
+    .AddMutationType<Mutation>()
+    .AddType<WorkoutInputType>(); ;
 
 var app = builder.Build();
 
