@@ -16,15 +16,30 @@ namespace WeightliftingTrackerGraphQLAPI.Resolvers
 
         public IEnumerable<Workout> GetWorkouts()
         {
-            string query = "SELECT * FROM Workouts";
+            string query = "SELECT * FROM Workout";
             MySqlParameter[] parameters = null; // You can add parameters if needed.
 
+            if (_dataAccess == null)
+            {
+                throw new NullReferenceException("_dataAccess is null");
+            }
+
             DataTable dt = _dataAccess.ExecuteQuery(query, parameters);
+
+            if (dt == null)
+            {
+                throw new NullReferenceException("dt is null");
+            }
 
             List<Workout> workouts = new List<Workout>();
 
             foreach (DataRow row in dt.Rows)
             {
+                if (row.IsNull("Id") || row.IsNull("ExerciseName") || row.IsNull("Sets") || row.IsNull("Reps") || row.IsNull("Weight"))
+                {
+                    throw new NullReferenceException("One of the row values is null");
+                }
+
                 Workout workout = new Workout
                 {
                     Id = Convert.ToInt32(row["Id"]),
@@ -38,6 +53,7 @@ namespace WeightliftingTrackerGraphQLAPI.Resolvers
 
             return workouts;
         }
+
 
         public Workout CreateWorkout(Workout newWorkout)
         {

@@ -1,11 +1,16 @@
+using WeightliftingTrackerGraphQLAPI.Data;
 using WeightliftingTrackerGraphQLAPI.GraphQL;
 using WeightliftingTrackerGraphQLAPI.GraphQL.Types;
+using WeightliftingTrackerGraphQLAPI.Resolvers;
 
 var builder = WebApplication.CreateBuilder(args);
 
 string connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 
-builder.Services.AddSingleton(x => new WeightliftingTrackerGraphQLAPI.Data.MySqlDataAccess(connectionString));
+// Registering services
+builder.Services.AddScoped<IMySqlDataAccess>(x => new MySqlDataAccess(connectionString));
+builder.Services.AddScoped<WorkoutResolvers>();
+builder.Services.AddScoped<Query>();
 
 // Add services to the container.
 builder.Services.AddControllers();
