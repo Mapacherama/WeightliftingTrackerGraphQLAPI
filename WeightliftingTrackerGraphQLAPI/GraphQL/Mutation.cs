@@ -1,5 +1,4 @@
 ﻿using HotChocolate;
-using HotChocolate.Data;
 using WeightliftingTrackerGraphQLAPI.Models;
 using WeightliftingTrackerGraphQLAPI.Data;
 

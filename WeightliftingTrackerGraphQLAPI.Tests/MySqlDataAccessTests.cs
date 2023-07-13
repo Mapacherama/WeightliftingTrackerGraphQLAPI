@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using MySql.Data.MySqlClient;
+using NUnit.Framework;
 using System.Data;
 using WeightliftingTrackerGraphQLAPI.Data;
 
@@ -13,11 +14,12 @@ namespace WeightliftingTrackerGraphQLAPI.Tests
         public void TestExecuteQuery()
         {
             string query = "SELECT * FROM Workout";
+            MySqlParameter[] parameters = null;
             MySqlDataAccess dataAccess = new MySqlDataAccess(ConnectionString);
 
             try
             {
-                DataTable result = dataAccess.ExecuteQuery(query);
+                DataTable result = dataAccess.ExecuteQuery(query, parameters);
 
                 // Display the retrieved data
                 Console.WriteLine("Workout Data:");

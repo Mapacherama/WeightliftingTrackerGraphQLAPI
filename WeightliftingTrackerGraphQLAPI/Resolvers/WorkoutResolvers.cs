@@ -7,9 +7,9 @@ namespace WeightliftingTrackerGraphQLAPI.Resolvers
 {
     public class WorkoutResolvers
     {
-        private readonly MySqlDataAccess _dataAccess;
+        private readonly IMySqlDataAccess _dataAccess;
 
-        public WorkoutResolvers(MySqlDataAccess dataAccess)
+        public WorkoutResolvers(IMySqlDataAccess dataAccess)
         {
             _dataAccess = dataAccess;
         }

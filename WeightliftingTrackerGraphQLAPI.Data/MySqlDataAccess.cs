@@ -3,7 +3,7 @@ using System.Data;
 
 namespace WeightliftingTrackerGraphQLAPI.Data
 {
-    public class MySqlDataAccess
+    public class MySqlDataAccess : IMySqlDataAccess
     {
         private readonly string _connectionString;
 
