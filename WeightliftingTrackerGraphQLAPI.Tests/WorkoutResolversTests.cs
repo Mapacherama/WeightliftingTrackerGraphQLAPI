@@ -66,5 +66,25 @@ namespace WeightliftingTrackerGraphQLAPI.Tests
             Assert.AreEqual(_testWorkout.Weight, workoutsList[0].Weight);
         }
 
+        [Test]
+        public void CreateWorkout_Returns_New_Workout()
+        {
+            // Arrange
+            _mockDataAccess.Setup(d => d.ExecuteQuery(It.IsAny<string>(), It.IsAny<MySqlParameter[]>()));
+            _mockDataAccess.Setup(d => d.ExecuteScalar(It.IsAny<string>(), It.IsAny<MySqlParameter[]>())).Returns(_testWorkout.Id);
+
+            // Act
+            var result = _workoutResolvers.CreateWorkout(_testWorkout);
+
+            // Assert
+            Assert.IsNotNull(result);
+            Assert.IsInstanceOf<Workout>(result);
+            Assert.AreEqual(_testWorkout.Id, result.Id);
+            Assert.AreEqual(_testWorkout.ExerciseName, result.ExerciseName);
+            Assert.AreEqual(_testWorkout.Sets, result.Sets);
+            Assert.AreEqual(_testWorkout.Reps, result.Reps);
+            Assert.AreEqual(_testWorkout.Weight, result.Weight);
+        }
+
     }
 }
