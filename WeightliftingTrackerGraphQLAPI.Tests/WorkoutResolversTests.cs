@@ -122,11 +122,9 @@ namespace WeightliftingTrackerGraphQLAPI.Tests
             dt.Rows.Add(row);
 
             _mockDataAccess.Setup(d => d.ExecuteQuery(It.IsAny<string>(), It.IsAny<MySqlParameter[]>())).Returns(dt);
-
-            // Act
+            
             var result = _workoutResolvers.UpdateWorkout(_testWorkout);
 
-            // Assert
             Assert.IsNotNull(result);
             Assert.IsInstanceOf<Workout>(result);
             Assert.AreEqual(_testWorkout.Id, result.Id);
@@ -139,20 +137,19 @@ namespace WeightliftingTrackerGraphQLAPI.Tests
         [Test]
         public void UpdateWorkout_ThrowsException_When_WorkoutIsNull()
         {
-            // Arrange
+            
             _mockDataAccess.Setup(d => d.ExecuteQuery(It.IsAny<string>(), It.IsAny<MySqlParameter[]>()));
 
-            // Act & Assert
+            
             Assert.Throws<ArgumentNullException>(() => _workoutResolvers.UpdateWorkout(null));
         }
 
         [Test]
         public void UpdateWorkout_ThrowsException_When_WorkoutDoesNotExist()
         {
-            // Arrange
             _mockDataAccess.Setup(d => d.ExecuteQuery(It.IsAny<string>(), It.IsAny<MySqlParameter[]>())).Returns((DataTable)null);
 
-            // Act & Assert
+            
             Assert.Throws<Exception>(() => _workoutResolvers.UpdateWorkout(_testWorkout), $"No workout found with ID: {_testWorkout.Id}");
         }
 
