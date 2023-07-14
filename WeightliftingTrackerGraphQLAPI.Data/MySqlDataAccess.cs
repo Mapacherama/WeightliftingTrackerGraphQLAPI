@@ -3,7 +3,7 @@ using System.Data;
 
 namespace WeightliftingTrackerGraphQLAPI.Data
 {
-    public class MySqlDataAccess
+    public class MySqlDataAccess : IMySqlDataAccess
     {
         private readonly string _connectionString;
 
@@ -12,7 +12,7 @@ namespace WeightliftingTrackerGraphQLAPI.Data
             _connectionString = connectionString;
         }
 
-        public DataTable ExecuteQuery(string query)
+        public DataTable ExecuteQuery(string query, MySqlParameter[] parameters )
         {
             DataTable resultTable = new DataTable();
 
@@ -22,6 +22,11 @@ namespace WeightliftingTrackerGraphQLAPI.Data
 
                 using (MySqlCommand command = new MySqlCommand(query, connection))
                 {
+                    if (parameters != null)
+                    {
+                        command.Parameters.AddRange(parameters);
+                    }
+
                     using (MySqlDataReader reader = command.ExecuteReader())
                     {
                         resultTable.Load(reader);
@@ -30,6 +35,28 @@ namespace WeightliftingTrackerGraphQLAPI.Data
             }
 
             return resultTable;
+        }
+
+        public object ExecuteScalar(string query, MySqlParameter[] parameters)
+        {
+            object result = null;
+
+            using (MySqlConnection connection = new MySqlConnection(_connectionString))
+            {
+                connection.Open();
+
+                using (MySqlCommand command = new MySqlCommand(query, connection))
+                {
+                    if (parameters != null)
+                    {
+                        command.Parameters.AddRange(parameters);
+                    }
+
+                    result = command.ExecuteScalar();
+                }
+            }
+
+            return result;
         }
     }
 }
