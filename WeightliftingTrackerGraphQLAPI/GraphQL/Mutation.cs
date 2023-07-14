@@ -16,7 +16,6 @@ namespace WeightliftingTrackerGraphQLAPI.GraphQL
 
         public Workout CreateWorkout(WorkoutInputDTO newWorkout)
         {
-            // Create a Workout object from the WorkoutInputType
             var workout = new Workout
             {
                 ExerciseName = newWorkout.ExerciseName,

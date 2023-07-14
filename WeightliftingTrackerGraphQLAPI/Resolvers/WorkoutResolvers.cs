@@ -62,7 +62,7 @@ namespace WeightliftingTrackerGraphQLAPI.Resolvers
                 throw new ArgumentNullException(nameof(newWorkout));
             }
 
-            string sqlQuery = "INSERT INTO Workouts (ExerciseName, Sets, Reps, Weight) VALUES (@ExerciseName, @Sets, @Reps, @Weight);";
+            string sqlQuery = "INSERT INTO Workout (ExerciseName, Sets, Reps, Weight) VALUES (@ExerciseName, @Sets, @Reps, @Weight);";
 
             MySqlParameter[] parameters = new MySqlParameter[]
         {
