@@ -12,7 +12,6 @@ namespace WeightliftingTrackerGraphQLAPI.GraphQL
         {
             _workoutResolvers = workoutResolvers;
         }
-
         public IEnumerable<Workout> GetWorkouts() => _workoutResolvers.GetWorkouts();
     }
 }

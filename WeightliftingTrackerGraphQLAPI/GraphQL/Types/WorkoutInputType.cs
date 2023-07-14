@@ -1,18 +1,16 @@
-﻿namespace WeightliftingTrackerGraphQLAPI.GraphQL.Types
+﻿using HotChocolate.Types;
+using WeightliftingTrackerGraphQLAPI.Models;
+
+namespace WeightliftingTrackerGraphQLAPI.GraphQL.Types
 {
-    public class WorkoutInputType
+    public class WorkoutInputType : InputObjectType<Workout>
     {
-        [GraphQLNonNullType]
-        public string? ExerciseName { get; set; }
-
-        [GraphQLNonNullType]
-        public int Sets { get; set; }
-
-        [GraphQLNonNullType]
-        public int Reps { get; set; }
-
-        [GraphQLNonNullType]
-        public decimal Weight { get; set; }
+        protected override void Configure(IInputObjectTypeDescriptor<Workout> descriptor)
+        {
+            descriptor.Field(w => w.ExerciseName).Type<NonNullType<StringType>>();
+            descriptor.Field(w => w.Sets).Type<NonNullType<IntType>>();
+            descriptor.Field(w => w.Reps).Type<NonNullType<IntType>>();
+            descriptor.Field(w => w.Weight).Type<NonNullType<FloatType>>();
+        }
     }
-
 }
