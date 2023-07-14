@@ -26,5 +26,19 @@ namespace WeightliftingTrackerGraphQLAPI.GraphQL
 
             return _workoutResolvers.CreateWorkout(workout);
         }
+
+        public Workout UpdateWorkout(WorkoutUpdateInputDTO updatedWorkoutDto)
+        {
+            var workout = new Workout
+            {
+                Id = updatedWorkoutDto.Id,
+                ExerciseName = updatedWorkoutDto.ExerciseName,
+                Sets = updatedWorkoutDto.Sets,
+                Reps = updatedWorkoutDto.Reps,
+                Weight = updatedWorkoutDto.Weight
+            };
+
+            return _workoutResolvers.UpdateWorkout(workout);
+        }
     }
 }
