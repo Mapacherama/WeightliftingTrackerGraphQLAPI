@@ -64,10 +64,10 @@ namespace WeightliftingTrackerGraphQLAPI.Resolvers
 
             MySqlParameter[] parameters = new MySqlParameter[]
             {
-        new MySqlParameter("@ExerciseName", newWorkout.ExerciseName),
-        new MySqlParameter("@Sets", newWorkout.Sets),
-        new MySqlParameter("@Reps", newWorkout.Reps),
-        new MySqlParameter("@Weight", newWorkout.Weight)
+                new MySqlParameter("@ExerciseName", newWorkout.ExerciseName),
+                new MySqlParameter("@Sets", newWorkout.Sets),
+                new MySqlParameter("@Reps", newWorkout.Reps),
+                new MySqlParameter("@Weight", newWorkout.Weight)
             };
 
             string selectQuery = "SELECT * FROM Workout WHERE ExerciseName = @ExerciseName AND Sets = @Sets AND Reps = @Reps AND Weight = @Weight;";
