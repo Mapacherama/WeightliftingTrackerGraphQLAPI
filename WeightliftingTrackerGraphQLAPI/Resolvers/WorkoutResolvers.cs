@@ -62,23 +62,30 @@ namespace WeightliftingTrackerGraphQLAPI.Resolvers
                 throw new ArgumentNullException(nameof(newWorkout));
             }
 
-            string sqlQuery = "INSERT INTO Workout (ExerciseName, Sets, Reps, Weight) VALUES (@ExerciseName, @Sets, @Reps, @Weight);";
-
             MySqlParameter[] parameters = new MySqlParameter[]
-        {
-            new MySqlParameter("@ExerciseName", newWorkout.ExerciseName),
-            new MySqlParameter("@Sets", newWorkout.Sets),
-            new MySqlParameter("@Reps", newWorkout.Reps),
-            new MySqlParameter("@Weight", newWorkout.Weight)
-        };
+            {
+        new MySqlParameter("@ExerciseName", newWorkout.ExerciseName),
+        new MySqlParameter("@Sets", newWorkout.Sets),
+        new MySqlParameter("@Reps", newWorkout.Reps),
+        new MySqlParameter("@Weight", newWorkout.Weight)
+            };
 
-            _dataAccess.ExecuteQuery(sqlQuery, parameters);
+            string selectQuery = "SELECT * FROM Workout WHERE ExerciseName = @ExerciseName AND Sets = @Sets AND Reps = @Reps AND Weight = @Weight;";
+            DataTable dt = _dataAccess.ExecuteQuery(selectQuery, parameters);
 
-            // Assuming MySqlDataAccess.ExecuteQuery returns the ID of the inserted record.
-            newWorkout.Id = Convert.ToInt32(_dataAccess.ExecuteScalar(sqlQuery, parameters));
+            if (dt != null && dt.Rows.Count > 0)
+            {
+                throw new Exception("A workout with the same details already exists.");
+            }
+
+            string insertQuery = "INSERT INTO Workout (ExerciseName, Sets, Reps, Weight) VALUES (@ExerciseName, @Sets, @Reps, @Weight);";
+            _dataAccess.ExecuteQuery(insertQuery, parameters);
+
+            newWorkout.Id = Convert.ToInt32(_dataAccess.ExecuteScalar("SELECT LAST_INSERT_ID();", null));
 
             return newWorkout;
         }
+
 
         public Workout UpdateWorkout(Workout updatedWorkout)
         {
