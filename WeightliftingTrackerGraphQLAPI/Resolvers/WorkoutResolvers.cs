@@ -29,34 +29,7 @@ namespace WeightliftingTrackerGraphQLAPI.Resolvers
 
         public Workout UpdateWorkout(Workout updatedWorkout)
         {
-            if (updatedWorkout == null)
-            {
-                throw new ArgumentNullException(nameof(updatedWorkout));
-            }
-
-            string selectQuery = "SELECT * FROM Workout WHERE Id = @Id;";
-            MySqlParameter selectParameter = new MySqlParameter("@Id", updatedWorkout.Id);
-            DataTable dt = _dataAccess.ExecuteQuery(selectQuery, new MySqlParameter[] { selectParameter });
-
-            if (dt == null || dt.Rows.Count == 0)
-            {
-                throw new Exception($"No workout found with ID: {updatedWorkout.Id}");
-            }
-
-            string sqlQuery = "UPDATE Workout SET ExerciseName = @ExerciseName, Sets = @Sets, Reps = @Reps, Weight = @Weight WHERE Id = @Id;";
-
-            MySqlParameter[] parameters = new MySqlParameter[]
-            {
-                new MySqlParameter("@Id", updatedWorkout.Id),
-                new MySqlParameter("@ExerciseName", updatedWorkout.ExerciseName),
-                new MySqlParameter("@Sets", updatedWorkout.Sets),
-                new MySqlParameter("@Reps", updatedWorkout.Reps),
-                new MySqlParameter("@Weight", updatedWorkout.Weight)
-            };
-
-            _dataAccess.ExecuteQuery(sqlQuery, parameters);
-
-            return updatedWorkout;
+            return _workoutRepository.UpdateWorkout(updatedWorkout);
         }
 
 
