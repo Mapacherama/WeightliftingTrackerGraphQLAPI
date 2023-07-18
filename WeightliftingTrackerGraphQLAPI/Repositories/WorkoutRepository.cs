@@ -11,7 +11,7 @@ namespace WeightliftingTrackerGraphQLAPI.Repositories
 
         public WorkoutRepository(IMySqlDataAccess dataAccess)
         {
-            _dataAccess = dataAccess;
+            _dataAccess = dataAccess ?? throw new ArgumentNullException(nameof(dataAccess));
         }
 
         public Workout CreateWorkout(Workout newWorkout)
