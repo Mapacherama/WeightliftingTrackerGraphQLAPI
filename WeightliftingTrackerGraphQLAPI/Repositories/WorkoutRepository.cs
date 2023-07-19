@@ -116,19 +116,19 @@ namespace WeightliftingTrackerGraphQLAPI.Repositories
             return dt.AsEnumerable().Select(row => WorkoutFromDataRow(row)).ToList();
         }
 
-        public Workout UpdateWorkout(Workout updatedWorkout)
+        public async Task<Workout> UpdateWorkout(Workout updatedWorkout)
         {
             ValidationHelper.CheckIfNull(updatedWorkout, nameof(updatedWorkout));
 
             MySqlParameter selectParameter = new MySqlParameter("@Id", updatedWorkout.Id);
-            DataTable dt = _dataAccess.ExecuteQueryAsync(QuerySelectWorkoutById, new MySqlParameter[] { selectParameter });
+            DataTable dt = await _dataAccess.ExecuteQueryAsync(QuerySelectWorkoutById, new MySqlParameter[] { selectParameter });
 
             if (dt == null || dt.Rows.Count == 0)
             {
                 throw new Exception($"No workout found with ID: {updatedWorkout.Id}");
             }            
 
-            _dataAccess.ExecuteQueryAsync(MutationUpdateExistingWorkout, UpdateParameters(updatedWorkout));
+            await _dataAccess.ExecuteQueryAsync(MutationUpdateExistingWorkout, UpdateParameters(updatedWorkout));
 
             return updatedWorkout;
         }
