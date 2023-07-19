@@ -14,6 +14,7 @@ namespace WeightliftingTrackerGraphQLAPI.Repositories
         private const string QuerySelectWorkoutById = "SELECT * FROM Workout WHERE Id = @Id;";
         private const string MutationInsertNewWorkout = "INSERT INTO Workout (ExerciseName, Sets, Reps, Weight) VALUES (@ExerciseName, @Sets, @Reps, @Weight);";
         private const string MutationUpdateExistingWorkout = "UPDATE Workout SET ExerciseName = @ExerciseName, Sets = @Sets, Reps = @Reps, Weight = @Weight WHERE Id = @Id;";
+        private const string MutationdeleteWorkout = "DELETE FROM Workout WHERE Id = @WorkoutId;";
         private const string QuerySelectLastInsertedId = "SELECT LAST_INSERT_ID();";
 
         public WorkoutRepository(IMySqlDataAccess dataAccess)
@@ -21,11 +22,11 @@ namespace WeightliftingTrackerGraphQLAPI.Repositories
             _dataAccess = dataAccess ?? throw new ArgumentNullException(nameof(dataAccess));
         }
 
-        public Workout CreateWorkout(Workout newWorkout)
+        public async Task<Workout> CreateWorkout(Workout newWorkout)
         {
             ValidationHelper.CheckIfNull(newWorkout, nameof(newWorkout));
 
-            DataTable dt = _dataAccess.ExecuteQuery(QuerySelectWorkoutByDetails, CreateParameters(newWorkout));
+            DataTable dt = await _dataAccess.ExecuteQueryAsync(QuerySelectWorkoutByDetails, CreateParameters(newWorkout));
 
             if (dt != null && dt.Rows.Count > 0)
             {
@@ -33,9 +34,9 @@ namespace WeightliftingTrackerGraphQLAPI.Repositories
             }
 
             
-            _dataAccess.ExecuteQuery(MutationInsertNewWorkout, CreateParameters(newWorkout));
+            _dataAccess.ExecuteQueryAsync(MutationInsertNewWorkout, CreateParameters(newWorkout));
 
-            newWorkout.Id = Convert.ToInt32(_dataAccess.ExecuteScalar(QuerySelectLastInsertedId, null));
+            newWorkout.Id = Convert.ToInt32(_dataAccess.ExecuteScalarAsync(QuerySelectLastInsertedId, null));
 
             return newWorkout;
         }
@@ -76,15 +77,36 @@ namespace WeightliftingTrackerGraphQLAPI.Repositories
             };
         }
 
-        public Workout DeleteWorkout(int workoutId)
+        public async Task<Workout> DeleteWorkout(int workoutId)
         {
-            throw new NotImplementedException();
+            MySqlParameter selectParameter = new MySqlParameter("@WorkoutId", workoutId);
+            DataTable dt = await _dataAccess.ExecuteQueryAsync(QuerySelectWorkoutById, new MySqlParameter[] { selectParameter });
+
+            if (dt == null || dt.Rows.Count == 0)
+            {
+                throw new Exception($"No workout found with ID: {workoutId}");
+            }
+
+            Workout deletedWorkout = new Workout
+            {
+                Id = Convert.ToInt32(dt.Rows[0]["Id"]),
+                ExerciseName = dt.Rows[0]["ExerciseName"].ToString(),
+                Sets = Convert.ToInt32(dt.Rows[0]["Sets"]),
+                Reps = Convert.ToInt32(dt.Rows[0]["Reps"]),
+                Weight = Convert.ToDecimal(dt.Rows[0]["Weight"])
+            };
+
+            
+            MySqlParameter deleteParameter = new MySqlParameter("@WorkoutId", workoutId);
+            await _dataAccess.ExecuteQueryAsync(MutationdeleteWorkout, new MySqlParameter[] { deleteParameter });
+
+            return deletedWorkout;
         }
 
-        public IEnumerable<Workout> GetWorkouts()
+        public async Task<IEnumerable<Workout>> GetWorkouts()
         {
 
-            DataTable dt = _dataAccess.ExecuteQuery(QuerySelectAllWorkouts, null);
+            DataTable dt = await _dataAccess.ExecuteQueryAsync(QuerySelectAllWorkouts, null);
 
             if (dt == null)
             {
@@ -99,14 +121,14 @@ namespace WeightliftingTrackerGraphQLAPI.Repositories
             ValidationHelper.CheckIfNull(updatedWorkout, nameof(updatedWorkout));
 
             MySqlParameter selectParameter = new MySqlParameter("@Id", updatedWorkout.Id);
-            DataTable dt = _dataAccess.ExecuteQuery(QuerySelectWorkoutById, new MySqlParameter[] { selectParameter });
+            DataTable dt = _dataAccess.ExecuteQueryAsync(QuerySelectWorkoutById, new MySqlParameter[] { selectParameter });
 
             if (dt == null || dt.Rows.Count == 0)
             {
                 throw new Exception($"No workout found with ID: {updatedWorkout.Id}");
             }            
 
-            _dataAccess.ExecuteQuery(MutationUpdateExistingWorkout, UpdateParameters(updatedWorkout));
+            _dataAccess.ExecuteQueryAsync(MutationUpdateExistingWorkout, UpdateParameters(updatedWorkout));
 
             return updatedWorkout;
         }
