@@ -9,9 +9,12 @@ namespace WeightliftingTrackerGraphQLAPI.Repositories
     public class WorkoutRepository : IWorkoutRepository
     {
         private readonly IMySqlDataAccess _dataAccess;
-        private const string SelectQuery = "SELECT * FROM Workout WHERE ExerciseName = @ExerciseName AND Sets = @Sets AND Reps = @Reps AND Weight = @Weight;";
-        private const string InsertQuery = "INSERT INTO Workout (ExerciseName, Sets, Reps, Weight) VALUES (@ExerciseName, @Sets, @Reps, @Weight);";
-        private const string SelectLastId = "SELECT LAST_INSERT_ID();";
+        private const string QuerySelectAllWorkouts = "SELECT * FROM Workout";
+        private const string QuerySelectWorkoutByDetails = "SELECT * FROM Workout WHERE ExerciseName = @ExerciseName AND Sets = @Sets AND Reps = @Reps AND Weight = @Weight;";
+        private const string QuerySelectWorkoutById = "SELECT * FROM Workout WHERE Id = @Id;";
+        private const string MutationInsertNewWorkout = "INSERT INTO Workout (ExerciseName, Sets, Reps, Weight) VALUES (@ExerciseName, @Sets, @Reps, @Weight);";
+        private const string MutationUpdateExistingWorkout = "UPDATE Workout SET ExerciseName = @ExerciseName, Sets = @Sets, Reps = @Reps, Weight = @Weight WHERE Id = @Id;";
+        private const string QuerySelectLastInsertedId = "SELECT LAST_INSERT_ID();";
 
         public WorkoutRepository(IMySqlDataAccess dataAccess)
         {
@@ -20,12 +23,9 @@ namespace WeightliftingTrackerGraphQLAPI.Repositories
 
         public Workout CreateWorkout(Workout newWorkout)
         {
-            if (newWorkout == null)
-            {
-                throw new ArgumentNullException(nameof(newWorkout));
-            }
+            ValidationHelper.CheckIfNull(newWorkout, nameof(newWorkout));
 
-            DataTable dt = _dataAccess.ExecuteQuery(SelectQuery, CreateParameters(newWorkout));
+            DataTable dt = _dataAccess.ExecuteQuery(QuerySelectWorkoutByDetails, CreateParameters(newWorkout));
 
             if (dt != null && dt.Rows.Count > 0)
             {
@@ -33,9 +33,9 @@ namespace WeightliftingTrackerGraphQLAPI.Repositories
             }
 
             
-            _dataAccess.ExecuteQuery(InsertQuery, CreateParameters(newWorkout));
+            _dataAccess.ExecuteQuery(MutationInsertNewWorkout, CreateParameters(newWorkout));
 
-            newWorkout.Id = Convert.ToInt32(_dataAccess.ExecuteScalar(SelectLastId, null));
+            newWorkout.Id = Convert.ToInt32(_dataAccess.ExecuteScalar(QuerySelectLastInsertedId, null));
 
             return newWorkout;
         }
@@ -50,13 +50,21 @@ namespace WeightliftingTrackerGraphQLAPI.Repositories
         new MySqlParameter("@Weight", workout.Weight)
             };
         }
+        private MySqlParameter[] UpdateParameters(Workout workout)
+        {
+            return new MySqlParameter[]
+            {
+                new MySqlParameter("@Id", workout.Id),
+                new MySqlParameter("@ExerciseName", workout.ExerciseName),
+                new MySqlParameter("@Sets", workout.Sets),
+                new MySqlParameter("@Reps", workout.Reps),
+                new MySqlParameter("@Weight", workout.Weight)
+            };
+        }
 
         private Workout WorkoutFromDataRow(DataRow row)
         {
-            if (row.IsNull("Id") || row.IsNull("ExerciseName") || row.IsNull("Sets") || row.IsNull("Reps") || row.IsNull("Weight"))
-            {
-                throw new NullReferenceException(ErrorMessages.RowValueIsNull);
-            }
+            DataRowHelper.CheckDataRow(row, "Id", "ExerciseName", "Sets", "Reps", "Weight");
 
             return new Workout
             {
@@ -75,9 +83,8 @@ namespace WeightliftingTrackerGraphQLAPI.Repositories
 
         public IEnumerable<Workout> GetWorkouts()
         {
-            string query = "SELECT * FROM Workout";
 
-            DataTable dt = _dataAccess.ExecuteQuery(query, null);
+            DataTable dt = _dataAccess.ExecuteQuery(QuerySelectAllWorkouts, null);
 
             if (dt == null)
             {
@@ -89,32 +96,17 @@ namespace WeightliftingTrackerGraphQLAPI.Repositories
 
         public Workout UpdateWorkout(Workout updatedWorkout)
         {
-            if (updatedWorkout == null)
-            {
-                throw new ArgumentNullException(nameof(updatedWorkout));
-            }
+            ValidationHelper.CheckIfNull(updatedWorkout, nameof(updatedWorkout));
 
-            string selectQuery = "SELECT * FROM Workout WHERE Id = @Id;";
             MySqlParameter selectParameter = new MySqlParameter("@Id", updatedWorkout.Id);
-            DataTable dt = _dataAccess.ExecuteQuery(selectQuery, new MySqlParameter[] { selectParameter });
+            DataTable dt = _dataAccess.ExecuteQuery(QuerySelectWorkoutById, new MySqlParameter[] { selectParameter });
 
             if (dt == null || dt.Rows.Count == 0)
             {
                 throw new Exception($"No workout found with ID: {updatedWorkout.Id}");
-            }
+            }            
 
-            string sqlQuery = "UPDATE Workout SET ExerciseName = @ExerciseName, Sets = @Sets, Reps = @Reps, Weight = @Weight WHERE Id = @Id;";
-
-            MySqlParameter[] parameters = new MySqlParameter[]
-            {
-                new MySqlParameter("@Id", updatedWorkout.Id),
-                new MySqlParameter("@ExerciseName", updatedWorkout.ExerciseName),
-                new MySqlParameter("@Sets", updatedWorkout.Sets),
-                new MySqlParameter("@Reps", updatedWorkout.Reps),
-                new MySqlParameter("@Weight", updatedWorkout.Weight)
-            };
-
-            _dataAccess.ExecuteQuery(sqlQuery, parameters);
+            _dataAccess.ExecuteQuery(MutationUpdateExistingWorkout, UpdateParameters(updatedWorkout));
 
             return updatedWorkout;
         }
