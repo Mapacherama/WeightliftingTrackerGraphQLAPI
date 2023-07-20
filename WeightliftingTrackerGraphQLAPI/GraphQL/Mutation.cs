@@ -27,6 +27,12 @@ namespace WeightliftingTrackerGraphQLAPI.GraphQL
             return await _workoutResolvers.CreateWorkout(workout);
         }
 
+        public async Task<Workout> DeleteWorkout(int id)
+        {           
+
+            return await _workoutResolvers.DeleteWorkout(id);
+        }
+
         public async Task<Workout> UpdateWorkout(WorkoutUpdateInputDTO updatedWorkoutDto)
         {
             var workout = new Workout
