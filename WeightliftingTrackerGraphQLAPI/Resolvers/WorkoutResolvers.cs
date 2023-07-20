@@ -15,21 +15,26 @@ namespace WeightliftingTrackerGraphQLAPI.Resolvers
             _workoutRepository = workoutRepository;
         }
 
-        public IEnumerable<Workout> GetWorkouts()
+        public async Task<IEnumerable<WorkoutDTO>> GetWorkouts()
         {
-            return _workoutRepository.GetWorkouts();
+            return await _workoutRepository.GetWorkouts();
         }
 
 
-        public Workout CreateWorkout(Workout newWorkout)
+        public async Task<Workout> CreateWorkout(Workout newWorkout)
         {
-            return _workoutRepository.CreateWorkout(newWorkout);
+            return await _workoutRepository.CreateWorkout(newWorkout);
+        }
+
+        public async Task<Workout> DeleteWorkout(int id)
+        {
+            return await _workoutRepository.DeleteWorkout(id);
         }
 
 
-        public Workout UpdateWorkout(Workout updatedWorkout)
+        public async Task<Workout> UpdateWorkout(Workout updatedWorkout)
         {
-            return _workoutRepository.UpdateWorkout(updatedWorkout);
+            return await _workoutRepository.UpdateWorkout(updatedWorkout);
         }
 
 

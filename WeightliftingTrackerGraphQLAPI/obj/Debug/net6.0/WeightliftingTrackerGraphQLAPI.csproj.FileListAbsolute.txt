@@ -111,3 +111,5 @@ C:\Users\Administrator\Documents\GitHub\WeightliftingTrackerGraphQLAPI\Weightlif
 C:\Users\Administrator\Documents\GitHub\WeightliftingTrackerGraphQLAPI\WeightliftingTrackerGraphQLAPI\bin\Debug\net6.0\nunit.engine.api.dll
 C:\Users\Administrator\Documents\GitHub\WeightliftingTrackerGraphQLAPI\WeightliftingTrackerGraphQLAPI\bin\Debug\net6.0\nunit.engine.core.dll
 C:\Users\Administrator\Documents\GitHub\WeightliftingTrackerGraphQLAPI\WeightliftingTrackerGraphQLAPI\bin\Debug\net6.0\testcentric.engine.metadata.dll
+C:\Users\Administrator\Documents\GitHub\WeightliftingTrackerGraphQLAPI\WeightliftingTrackerGraphQLAPI\bin\Debug\net6.0\AutoMapper.dll
+C:\Users\Administrator\Documents\GitHub\WeightliftingTrackerGraphQLAPI\WeightliftingTrackerGraphQLAPI\bin\Debug\net6.0\AutoMapper.Extensions.Microsoft.DependencyInjection.dll

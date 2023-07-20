@@ -5,22 +5,27 @@ using WeightliftingTrackerGraphQLAPI.Data;
 using WeightliftingTrackerGraphQLAPI.Models;
 using WeightliftingTrackerGraphQLAPI.Resolvers;
 using System.Data;
+using WeightliftingTrackerGraphQLAPI.Repositories;
 
 namespace WeightliftingTrackerGraphQLAPI.Tests
 {
     public class WorkoutResolversTests
     {
         private Mock<IMySqlDataAccess>? _mockDataAccess;
+        private Mock<IWorkoutRepository>? _mockWorkoutRepository;
         private WorkoutResolvers? _workoutResolvers;
-        private Workout? _testWorkout;
+
+        private WorkoutDTO? _testWorkout;
 
         [SetUp]
         public void SetUp()
-        {
+        {            
             _mockDataAccess = new Mock<IMySqlDataAccess>();
-            _workoutResolvers = new WorkoutResolvers(_mockDataAccess.Object);
+            _mockWorkoutRepository = new Mock<IWorkoutRepository>();
+            
+            _workoutResolvers = new WorkoutResolvers(_mockWorkoutRepository.Object);
 
-            _testWorkout = new Workout
+            _testWorkout = new WorkoutDTO
             {
                 Id = 1,
                 ExerciseName = "Test Exercise",
@@ -28,10 +33,11 @@ namespace WeightliftingTrackerGraphQLAPI.Tests
                 Reps = 10,
                 Weight = 50
             };
+            
         }
 
         [Test]
-        public void GetWorkouts_Returns_Workouts_List()
+        public async Task GetWorkouts_Returns_Workouts_List()
         {
             
             DataTable dt = new DataTable();
@@ -49,15 +55,16 @@ namespace WeightliftingTrackerGraphQLAPI.Tests
             row["Weight"] = _testWorkout.Weight;
             dt.Rows.Add(row);
 
-            _mockDataAccess.Setup(d => d.ExecuteQuery(It.IsAny<string>(), It.IsAny<MySqlParameter[]>())).Returns(dt);
+            _mockDataAccess.Setup(d => d.ExecuteQueryAsync(It.IsAny<string>(), It.IsAny<MySqlParameter[]>())).ReturnsAsync(dt);
+            _mockWorkoutRepository.Setup(r => r.GetWorkouts()).ReturnsAsync(new List<WorkoutDTO> { _testWorkout });
 
             // Act
-            var result = _workoutResolvers.GetWorkouts();
+            var result = await _workoutResolvers.GetWorkouts();
 
             // Assert
             Assert.IsNotNull(result);
-            Assert.IsInstanceOf<IEnumerable<Workout>>(result);
-            var workoutsList = result as IList<Workout>;
+            Assert.IsInstanceOf<IEnumerable<WorkoutDTO>>(result);
+            var workoutsList = result as IList<WorkoutDTO>;
             Assert.AreEqual(1, workoutsList.Count);
             Assert.AreEqual(_testWorkout.Id, workoutsList[0].Id);
             Assert.AreEqual(_testWorkout.ExerciseName, workoutsList[0].ExerciseName);
@@ -67,14 +74,25 @@ namespace WeightliftingTrackerGraphQLAPI.Tests
         }
 
         [Test]
-        public void CreateWorkout_Returns_New_Workout()
+        public async Task CreateWorkout_Returns_New_Workout()
         {
             // Arrange
-            _mockDataAccess.Setup(d => d.ExecuteQuery(It.IsAny<string>(), It.IsAny<MySqlParameter[]>()));
-            _mockDataAccess.Setup(d => d.ExecuteScalar(It.IsAny<string>(), It.IsAny<MySqlParameter[]>())).Returns(_testWorkout.Id);
+            _mockDataAccess.Setup(d => d.ExecuteQueryAsync(It.IsAny<string>(), It.IsAny<MySqlParameter[]>()));
+            _mockDataAccess.Setup(d => d.ExecuteScalarAsync(It.IsAny<string>(), It.IsAny<MySqlParameter[]>())).ReturnsAsync(_testWorkout.Id);
+            _mockWorkoutRepository.Setup(r => r.CreateWorkout(It.IsAny<Workout>()))
+       .ReturnsAsync((Workout newWorkout) => newWorkout);
+
+            var workout = new Workout
+            {
+                Id = _testWorkout.Id,
+                ExerciseName = _testWorkout.ExerciseName,
+                Sets = _testWorkout.Sets,
+                Reps = _testWorkout.Reps,
+                Weight = _testWorkout.Weight
+            };           
 
             // Act
-            var result = _workoutResolvers.CreateWorkout(_testWorkout);
+            var result = await _workoutResolvers.CreateWorkout(workout);
 
             // Assert
             Assert.IsNotNull(result);
@@ -87,18 +105,21 @@ namespace WeightliftingTrackerGraphQLAPI.Tests
         }
 
         [Test]
-        public void CreateWorkout_ThrowsException_When_WorkoutIsNull()
+        public async Task CreateWorkout_ThrowsException_When_WorkoutIsNull()
         {
             
-            _mockDataAccess.Setup(d => d.ExecuteQuery(It.IsAny<string>(), It.IsAny<MySqlParameter[]>()));
-            _mockDataAccess.Setup(d => d.ExecuteScalar(It.IsAny<string>(), It.IsAny<MySqlParameter[]>()));
+            _mockDataAccess.Setup(d => d.ExecuteQueryAsync(It.IsAny<string>(), It.IsAny<MySqlParameter[]>()));
+            _mockDataAccess.Setup(d => d.ExecuteScalarAsync(It.IsAny<string>(), It.IsAny<MySqlParameter[]>()));
 
-            
-            Assert.Throws<ArgumentNullException>(() => _workoutResolvers.CreateWorkout(null));
+            _mockWorkoutRepository.Setup(r => r.CreateWorkout(It.IsAny<Workout>()))
+    .ThrowsAsync(new ArgumentNullException());
+
+            Assert.ThrowsAsync<ArgumentNullException>(async () => await _workoutResolvers.CreateWorkout(null));
+
         }
 
         [Test]
-        public void UpdateWorkout_Returns_Updated_Workout()
+        public async Task UpdateWorkout_Returns_Updated_Workout()
         {
             // Arrange
             _testWorkout.ExerciseName = "Updated Test Exercise";
@@ -121,9 +142,20 @@ namespace WeightliftingTrackerGraphQLAPI.Tests
             row["Weight"] = _testWorkout.Weight;
             dt.Rows.Add(row);
 
-            _mockDataAccess.Setup(d => d.ExecuteQuery(It.IsAny<string>(), It.IsAny<MySqlParameter[]>())).Returns(dt);
-            
-            var result = _workoutResolvers.UpdateWorkout(_testWorkout);
+            var workout = new Workout
+            {
+                Id = _testWorkout.Id,
+                ExerciseName = _testWorkout.ExerciseName,
+                Sets = _testWorkout.Sets,
+                Reps = _testWorkout.Reps,
+                Weight = _testWorkout.Weight
+            };
+
+            _mockDataAccess.Setup(d => d.ExecuteQueryAsync(It.IsAny<string>(), It.IsAny<MySqlParameter[]>())).ReturnsAsync(dt);
+            _mockWorkoutRepository.Setup(r => r.UpdateWorkout(It.IsAny<Workout>()))
+            .ReturnsAsync((Workout newWorkout) => newWorkout);
+
+            var result = await _workoutResolvers.UpdateWorkout(workout);
 
             Assert.IsNotNull(result);
             Assert.IsInstanceOf<Workout>(result);
@@ -135,22 +167,35 @@ namespace WeightliftingTrackerGraphQLAPI.Tests
         }
 
         [Test]
-        public void UpdateWorkout_ThrowsException_When_WorkoutIsNull()
+        public async Task UpdateWorkout_ThrowsException_When_WorkoutIsNull()
         {
             
-            _mockDataAccess.Setup(d => d.ExecuteQuery(It.IsAny<string>(), It.IsAny<MySqlParameter[]>()));
+            _mockDataAccess.Setup(d => d.ExecuteQueryAsync(It.IsAny<string>(), It.IsAny<MySqlParameter[]>()));
 
-            
-            Assert.Throws<ArgumentNullException>(() => _workoutResolvers.UpdateWorkout(null));
+            _mockWorkoutRepository.Setup(r => r.UpdateWorkout(It.IsAny<Workout>()))
+    .ThrowsAsync(new ArgumentNullException());
+
+            Assert.ThrowsAsync<ArgumentNullException>(() => _workoutResolvers.UpdateWorkout(null));
+
         }
 
         [Test]
-        public void UpdateWorkout_ThrowsException_When_WorkoutDoesNotExist()
+        public async Task UpdateWorkout_ThrowsException_When_WorkoutDoesNotExist()
         {
-            _mockDataAccess.Setup(d => d.ExecuteQuery(It.IsAny<string>(), It.IsAny<MySqlParameter[]>())).Returns((DataTable)null);
+            _mockDataAccess.Setup(d => d.ExecuteQueryAsync(It.IsAny<string>(), It.IsAny<MySqlParameter[]>())).ReturnsAsync((DataTable)null);
+            _mockWorkoutRepository.Setup(r => r.UpdateWorkout(It.IsAny<Workout>())).ThrowsAsync(new Exception());
 
-            
-            Assert.Throws<Exception>(() => _workoutResolvers.UpdateWorkout(_testWorkout), $"No workout found with ID: {_testWorkout.Id}");
+            var workout = new Workout
+            {
+                Id = _testWorkout.Id,
+                ExerciseName = _testWorkout.ExerciseName,
+                Sets = _testWorkout.Sets,
+                Reps = _testWorkout.Reps,
+                Weight = _testWorkout.Weight
+            };
+
+
+            Assert.ThrowsAsync<Exception>(async() => await _workoutResolvers.UpdateWorkout(workout), $"No workout found with ID: {_testWorkout.Id}");
         }
 
 

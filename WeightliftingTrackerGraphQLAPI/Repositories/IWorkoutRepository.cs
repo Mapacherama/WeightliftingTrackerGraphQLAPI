@@ -4,9 +4,9 @@ namespace WeightliftingTrackerGraphQLAPI.Repositories
 {
     public interface IWorkoutRepository
     {
-        IEnumerable<Workout> GetWorkouts();
-        Workout CreateWorkout(Workout newWorkout);
-        Workout UpdateWorkout(Workout updatedWorkout);
-        Workout DeleteWorkout(int workoutId);
+        Task<IEnumerable<WorkoutDTO>> GetWorkouts();
+        Task<Workout> CreateWorkout(Workout newWorkout);
+        Task<Workout> UpdateWorkout(Workout updatedWorkout);
+        Task<Workout> DeleteWorkout(int workoutId);
     }
 }

@@ -5,7 +5,7 @@ namespace WeightliftingTrackerGraphQLAPI.Data
 {
     public interface IMySqlDataAccess
     {
-        DataTable ExecuteQuery(string query, MySqlParameter[] parameters);
-        object ExecuteScalar(string query, MySqlParameter[] parameters);
+        Task<DataTable> ExecuteQueryAsync(string query, MySqlParameter[] parameters);
+        Task<object> ExecuteScalarAsync(string query, MySqlParameter[] parameters);
     }
 }

@@ -12,13 +12,13 @@ namespace WeightliftingTrackerGraphQLAPI.Data
             _connectionString = connectionString;
         }
 
-        public DataTable ExecuteQuery(string query, MySqlParameter[] parameters )
+        public async Task<DataTable> ExecuteQueryAsync(string query, MySqlParameter[] parameters )
         {
             DataTable resultTable = new DataTable();
 
             using (MySqlConnection connection = new MySqlConnection(_connectionString))
             {
-                connection.Open();
+                await connection.OpenAsync();
 
                 using (MySqlCommand command = new MySqlCommand(query, connection))
                 {
@@ -27,7 +27,7 @@ namespace WeightliftingTrackerGraphQLAPI.Data
                         command.Parameters.AddRange(parameters);
                     }
 
-                    using (MySqlDataReader reader = command.ExecuteReader())
+                    using (var reader = await command.ExecuteReaderAsync())
                     {
                         resultTable.Load(reader);
                     }
@@ -37,13 +37,13 @@ namespace WeightliftingTrackerGraphQLAPI.Data
             return resultTable;
         }
 
-        public object ExecuteScalar(string query, MySqlParameter[] parameters)
+        public async Task<object> ExecuteScalarAsync(string query, MySqlParameter[] parameters)
         {
             object result = null;
 
             using (MySqlConnection connection = new MySqlConnection(_connectionString))
             {
-                connection.Open();
+                await connection.OpenAsync();
 
                 using (MySqlCommand command = new MySqlCommand(query, connection))
                 {
@@ -52,7 +52,7 @@ namespace WeightliftingTrackerGraphQLAPI.Data
                         command.Parameters.AddRange(parameters);
                     }
 
-                    result = command.ExecuteScalar();
+                    result = await command.ExecuteScalarAsync();
                 }
             }
 
