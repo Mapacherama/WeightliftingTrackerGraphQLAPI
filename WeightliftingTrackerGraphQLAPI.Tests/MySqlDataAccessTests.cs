@@ -11,7 +11,7 @@ namespace WeightliftingTrackerGraphQLAPI.Tests
         private const string ConnectionString = "SERVER=localhost;DATABASE=weightlifting_tracker;UID=root;PASSWORD=admin;";
 
         [Test]
-        public async void TestExecuteQuery()
+        public async Task TestExecuteQuery()
         {
             string query = "SELECT * FROM Workout";
             MySqlParameter[] parameters = null;
