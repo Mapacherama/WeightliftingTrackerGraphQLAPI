@@ -1,18 +1,21 @@
-using WeightliftingTrackerGraphQLAPI.Data;
+using WeightliftingTrackerGraphQLAPI.Configuration;
+using WeightliftingTrackerGraphQLAPI.Extensions;
 using WeightliftingTrackerGraphQLAPI.GraphQL;
 using WeightliftingTrackerGraphQLAPI.GraphQL.Types;
-using WeightliftingTrackerGraphQLAPI.Repositories;
-using WeightliftingTrackerGraphQLAPI.Resolvers;
+using WeightliftingTrackerGraphQLAPI.Mappings;
 
 var builder = WebApplication.CreateBuilder(args);
 
 string connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 
 // Registering services
-builder.Services.AddScoped<IMySqlDataAccess>(x => new MySqlDataAccess(connectionString));
-builder.Services.AddScoped<WorkoutResolvers>();
-builder.Services.AddScoped<IWorkoutRepository, WorkoutRepository>();
+builder.Services.AddDataServices(ApplicationConfigurations.GetConnectionString(builder));
+builder.Services.AddResolvers();
+builder.Services.AddRepositories();
 builder.Services.AddScoped<Query>();
+builder.Services.AddAutoMapper(typeof(MappingProfile));
+
+ApplicationConfigurations.ConfigureCors(builder.Services);
 
 // Add services to the container.
 builder.Services.AddControllers();
@@ -33,10 +36,12 @@ app.UseHttpsRedirection();
 
 app.UseRouting();
 
+app.UseCors("Open");
+
 app.UseEndpoints(endpoints =>
 {
     endpoints.MapControllers();
     endpoints.MapGraphQL();
 });
 
-app.Run();
+await app.RunAsync();

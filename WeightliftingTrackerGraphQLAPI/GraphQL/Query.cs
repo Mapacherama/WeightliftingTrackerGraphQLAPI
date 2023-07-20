@@ -12,6 +12,6 @@ namespace WeightliftingTrackerGraphQLAPI.GraphQL
         {
             _workoutResolvers = workoutResolvers;
         }
-        public IEnumerable<Workout> GetWorkouts() => _workoutResolvers.GetWorkouts();
+        public async Task<IEnumerable<WorkoutDTO>> GetWorkouts() => await _workoutResolvers.GetWorkouts();
     }
 }

@@ -11,7 +11,7 @@ namespace WeightliftingTrackerGraphQLAPI.Tests
         private const string ConnectionString = "SERVER=localhost;DATABASE=weightlifting_tracker;UID=root;PASSWORD=admin;";
 
         [Test]
-        public void TestExecuteQuery()
+        public async void TestExecuteQuery()
         {
             string query = "SELECT * FROM Workout";
             MySqlParameter[] parameters = null;
@@ -19,7 +19,7 @@ namespace WeightliftingTrackerGraphQLAPI.Tests
 
             try
             {
-                DataTable result = dataAccess.ExecuteQuery(query, parameters);
+                DataTable result = await dataAccess.ExecuteQueryAsync(query, parameters);
 
                 // Display the retrieved data
                 Console.WriteLine("Workout Data:");

@@ -14,7 +14,7 @@ namespace WeightliftingTrackerGraphQLAPI.GraphQL
             _workoutResolvers = workoutResolvers;
         }
 
-        public Workout CreateWorkout(WorkoutInputDTO newWorkout)
+        public async Task<Workout> CreateWorkout(WorkoutInputDTO newWorkout)
         {
             var workout = new Workout
             {
@@ -24,10 +24,10 @@ namespace WeightliftingTrackerGraphQLAPI.GraphQL
                 Weight = newWorkout.Weight
             };
 
-            return _workoutResolvers.CreateWorkout(workout);
+            return await _workoutResolvers.CreateWorkout(workout);
         }
 
-        public Workout UpdateWorkout(WorkoutUpdateInputDTO updatedWorkoutDto)
+        public async Task<Workout> UpdateWorkout(WorkoutUpdateInputDTO updatedWorkoutDto)
         {
             var workout = new Workout
             {
@@ -38,7 +38,7 @@ namespace WeightliftingTrackerGraphQLAPI.GraphQL
                 Weight = updatedWorkoutDto.Weight
             };
 
-            return _workoutResolvers.UpdateWorkout(workout);
+            return await _workoutResolvers.UpdateWorkout(workout);
         }
     }
 }
