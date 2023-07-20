@@ -5,11 +5,13 @@ using WeightliftingTrackerGraphQLAPI.Data;
 using WeightliftingTrackerGraphQLAPI.Models;
 using WeightliftingTrackerGraphQLAPI.Resolvers;
 using System.Data;
+using WeightliftingTrackerGraphQLAPI.Repositories;
 
 namespace WeightliftingTrackerGraphQLAPI.Tests
 {
     public class WorkoutResolversTests
     {
+        private Mock<IWorkoutRepository>? _mockWorkoutRepository;
         private Mock<IMySqlDataAccess>? _mockDataAccess;
         private WorkoutResolvers? _workoutResolvers;
         private Workout? _testWorkout;
@@ -17,8 +19,9 @@ namespace WeightliftingTrackerGraphQLAPI.Tests
         [SetUp]
         public void SetUp()
         {
-            _mockDataAccess = new Mock<IMySqlDataAccess>();
-            _workoutResolvers = new WorkoutResolvers(_mockDataAccess.Object);
+
+            _mockWorkoutRepository = new Mock<IWorkoutRepository>();
+            _workoutResolvers = new WorkoutResolvers(_mockWorkoutRepository.Object);
 
             _testWorkout = new Workout
             {
@@ -49,7 +52,7 @@ namespace WeightliftingTrackerGraphQLAPI.Tests
             row["Weight"] = _testWorkout.Weight;
             dt.Rows.Add(row);
 
-            _mockDataAccess.Setup(d => d.ExecuteQuery(It.IsAny<string>(), It.IsAny<MySqlParameter[]>())).Returns(dt);
+            _mockDataAccess.Setup(d => d.ExecuteQueryAsync(It.IsAny<string>(), It.IsAny<MySqlParameter[]>())).ReturnsAsync(dt);
 
             // Act
             var result = _workoutResolvers.GetWorkouts();
