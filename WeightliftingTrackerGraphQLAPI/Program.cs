@@ -1,6 +1,7 @@
 using WeightliftingTrackerGraphQLAPI.Data;
 using WeightliftingTrackerGraphQLAPI.GraphQL;
 using WeightliftingTrackerGraphQLAPI.GraphQL.Types;
+using WeightliftingTrackerGraphQLAPI.Mappings;
 using WeightliftingTrackerGraphQLAPI.Repositories;
 using WeightliftingTrackerGraphQLAPI.Resolvers;
 
@@ -13,6 +14,7 @@ builder.Services.AddScoped<IMySqlDataAccess>(x => new MySqlDataAccess(connection
 builder.Services.AddScoped<WorkoutResolvers>();
 builder.Services.AddScoped<IWorkoutRepository, WorkoutRepository>();
 builder.Services.AddScoped<Query>();
+builder.Services.AddAutoMapper(typeof(MappingProfile));
 
 // Add services to the container.
 builder.Services.AddControllers();
