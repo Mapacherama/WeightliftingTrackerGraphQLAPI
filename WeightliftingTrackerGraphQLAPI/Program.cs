@@ -10,6 +10,7 @@ string connectionString = builder.Configuration.GetConnectionString("DefaultConn
 
 // Registering services
 builder.Services.AddDataServices(ApplicationConfigurations.GetConnectionString(builder));
+builder.Services.ConfigureAuthentication(builder.Configuration);
 builder.Services.AddResolvers();
 builder.Services.AddRepositories();
 builder.Services.AddScoped<Query>();
@@ -34,9 +35,12 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
+app.UseCors("Open");
+
 app.UseRouting();
 
-app.UseCors("Open");
+app.UseAuthentication();
+app.UseAuthorization();
 
 app.UseEndpoints(endpoints =>
 {

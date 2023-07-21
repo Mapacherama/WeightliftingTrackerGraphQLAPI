@@ -11,6 +11,7 @@
 using System;
 using System.Reflection;
 
+[assembly: Microsoft.Extensions.Configuration.UserSecrets.UserSecretsIdAttribute("38838698-8290-4ca8-8042-7f45693a5764")]
 [assembly: System.Reflection.AssemblyCompanyAttribute("WeightliftingTrackerGraphQLAPI")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
