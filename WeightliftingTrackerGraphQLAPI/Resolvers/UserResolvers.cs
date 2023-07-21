@@ -1,6 +1,7 @@
 ﻿using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
+using Helpers;
 using Microsoft.IdentityModel.Tokens;
 using WeightliftingTrackerGraphQLAPI.Models;
 
@@ -10,9 +11,9 @@ namespace WeightliftingTrackerGraphQLAPI.Resolvers
     {
         public string Login(User user)
         {
-            
+            string secretKey = TemporarySecretKeyGenerator.GenerateTemporarySecretKey();
             var tokenHandler = new JwtSecurityTokenHandler();
-            var key = Encoding.ASCII.GetBytes("<Your JWT Secret Key>");
+            var key = Encoding.ASCII.GetBytes(secretKey);
             var tokenDescriptor = new SecurityTokenDescriptor
             {
                 Subject = new ClaimsIdentity(new[] { new Claim("id", user.Id.ToString()) }),

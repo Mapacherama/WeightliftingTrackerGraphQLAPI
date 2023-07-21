@@ -20,6 +20,7 @@ namespace WeightliftingTrackerGraphQLAPI.Extensions
             if (services == null) throw new ArgumentNullException(nameof(services));
 
             services.AddScoped<WorkoutResolvers>();
+            services.AddScoped<UserResolvers>();
             return services;
         }
 
