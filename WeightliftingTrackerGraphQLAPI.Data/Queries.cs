@@ -9,5 +9,7 @@
         public const string MutationUpdateExistingWorkout = "UPDATE Workout SET ExerciseName = @ExerciseName, Sets = @Sets, Reps = @Reps, Weight = @Weight WHERE Id = @Id;";
         public const string MutationdeleteWorkout = "DELETE FROM Workout WHERE Id = @WorkoutId;";
         public const string QuerySelectLastInsertedId = "SELECT LAST_INSERT_ID();";
+        public const string QuerySelectUserByUsername = "SELECT * FROM User where Username = @Username";
+        public const string MutationInsertNewUser = "INSERT INTO User(Username, Password) VALUES(@Username, @Password);";
     }
 }
