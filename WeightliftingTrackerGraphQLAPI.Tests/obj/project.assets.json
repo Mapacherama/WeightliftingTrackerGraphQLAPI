@@ -2167,6 +2167,16 @@
           "lib/netstandard1.3/System.Xml.XDocument.dll": {}
         }
       },
+      "SecretKeyGenerator/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v6.0",
+        "compile": {
+          "bin/placeholder/SecretKeyGenerator.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/SecretKeyGenerator.dll": {}
+        }
+      },
       "WeightliftingTrackerGraphQLAPI/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v6.0",
@@ -2178,6 +2188,7 @@
           "MySql.Data": "8.0.33",
           "NUnit": "3.13.3",
           "NUnit3TestAdapter": "4.2.0",
+          "SecretKeyGenerator": "1.0.0",
           "System.IdentityModel.Tokens.Jwt": "6.32.0",
           "WeightliftingTrackerGraphQLAPI.Data": "1.0.0"
         },
@@ -6967,6 +6978,11 @@
         "system.xml.xdocument.4.0.11.nupkg.sha512",
         "system.xml.xdocument.nuspec"
       ]
+    },
+    "SecretKeyGenerator/1.0.0": {
+      "type": "project",
+      "path": "../SecretKeyGenerator/SecretKeyGenerator.csproj",
+      "msbuildProject": "../SecretKeyGenerator/SecretKeyGenerator.csproj"
     },
     "WeightliftingTrackerGraphQLAPI/1.0.0": {
       "type": "project",

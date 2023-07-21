@@ -1333,6 +1333,16 @@
           }
         }
       },
+      "SecretKeyGenerator/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v6.0",
+        "compile": {
+          "bin/placeholder/SecretKeyGenerator.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/SecretKeyGenerator.dll": {}
+        }
+      },
       "WeightliftingTrackerGraphQLAPI.Data/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v6.0",
@@ -3864,6 +3874,11 @@
         "version.txt"
       ]
     },
+    "SecretKeyGenerator/1.0.0": {
+      "type": "project",
+      "path": "../SecretKeyGenerator/SecretKeyGenerator.csproj",
+      "msbuildProject": "../SecretKeyGenerator/SecretKeyGenerator.csproj"
+    },
     "WeightliftingTrackerGraphQLAPI.Data/1.0.0": {
       "type": "project",
       "path": "../WeightliftingTrackerGraphQLAPI.Data/WeightliftingTrackerGraphQLAPI.Data.csproj",
@@ -3879,6 +3894,7 @@
       "MySql.Data >= 8.0.33",
       "NUnit >= 3.13.3",
       "NUnit3TestAdapter >= 4.2.0",
+      "SecretKeyGenerator >= 1.0.0",
       "System.IdentityModel.Tokens.Jwt >= 6.32.0",
       "WeightliftingTrackerGraphQLAPI.Data >= 1.0.0"
     ]
@@ -3911,6 +3927,9 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "projectReferences": {
+            "C:\\Users\\Administrator\\Documents\\GitHub\\WeightliftingTrackerGraphQLAPI\\SecretKeyGenerator\\SecretKeyGenerator.csproj": {
+              "projectPath": "C:\\Users\\Administrator\\Documents\\GitHub\\WeightliftingTrackerGraphQLAPI\\SecretKeyGenerator\\SecretKeyGenerator.csproj"
+            },
             "C:\\Users\\Administrator\\Documents\\GitHub\\WeightliftingTrackerGraphQLAPI\\WeightliftingTrackerGraphQLAPI.Data\\WeightliftingTrackerGraphQLAPI.Data.csproj": {
               "projectPath": "C:\\Users\\Administrator\\Documents\\GitHub\\WeightliftingTrackerGraphQLAPI\\WeightliftingTrackerGraphQLAPI.Data\\WeightliftingTrackerGraphQLAPI.Data.csproj"
             }

@@ -4,6 +4,7 @@
     <TargetFramework>net6.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
+    <UserSecretsId>38838698-8290-4ca8-8042-7f45693a5764</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
@@ -18,6 +19,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\SecretKeyGenerator\SecretKeyGenerator.csproj" />
     <ProjectReference Include="..\WeightliftingTrackerGraphQLAPI.Data\WeightliftingTrackerGraphQLAPI.Data.csproj" />
   </ItemGroup>
 

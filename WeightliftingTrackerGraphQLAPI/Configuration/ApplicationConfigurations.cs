@@ -26,6 +26,8 @@ namespace WeightliftingTrackerGraphQLAPI.Configuration
         {
             var jwtSettings = configuration.GetSection("JwtSettings").Get<JwtSettings>();
 
+            string secretKey = configuration["JwtSettings:SecretKey"];
+
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 .AddJwtBearer(options =>
                 {
@@ -37,7 +39,7 @@ namespace WeightliftingTrackerGraphQLAPI.Configuration
                         ValidateIssuerSigningKey = true,
                         ValidIssuer = jwtSettings.Issuer,
                         ValidAudience = jwtSettings.Audience,
-                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtSettings.SecretKey))
+                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(secretKey))
                     };
                 });
         }
