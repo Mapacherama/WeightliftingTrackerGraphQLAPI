@@ -4,11 +4,18 @@ using System.Text;
 using Helpers;
 using Microsoft.IdentityModel.Tokens;
 using WeightliftingTrackerGraphQLAPI.Models;
+using WeightliftingTrackerGraphQLAPI.Repositories;
 
 namespace WeightliftingTrackerGraphQLAPI.Resolvers
 {
     public class UserResolvers
     {
+        private readonly IUserRepository _userRepository;
+        public UserResolvers(IUserRepository userRepository)
+        {
+            _userRepository = userRepository;
+        }
+
         public string Login(User user)
         {
             string secretKey = TemporarySecretKeyGenerator.GenerateTemporarySecretKey();
@@ -24,6 +31,11 @@ namespace WeightliftingTrackerGraphQLAPI.Resolvers
             var tokenString = tokenHandler.WriteToken(token);
 
             return tokenString;
+        }
+
+        public async Task<User> CreateUser(User newUser)
+        {
+            return await _userRepository.CreateUser(newUser);
         }
     }
 }
