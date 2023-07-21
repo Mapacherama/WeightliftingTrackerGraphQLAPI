@@ -161,3 +161,16 @@ C:\Users\Administrator\Documents\GitHub\WeightliftingTrackerGraphQLAPI\Weightlif
 C:\Users\Administrator\Documents\GitHub\WeightliftingTrackerGraphQLAPI\WeightliftingTrackerGraphQLAPI.Tests\bin\Debug\net6.0\Moq.dll
 C:\Users\Administrator\Documents\GitHub\WeightliftingTrackerGraphQLAPI\WeightliftingTrackerGraphQLAPI.Tests\bin\Debug\net6.0\AutoMapper.dll
 C:\Users\Administrator\Documents\GitHub\WeightliftingTrackerGraphQLAPI\WeightliftingTrackerGraphQLAPI.Tests\bin\Debug\net6.0\AutoMapper.Extensions.Microsoft.DependencyInjection.dll
+C:\Users\Administrator\Documents\GitHub\WeightliftingTrackerGraphQLAPI\WeightliftingTrackerGraphQLAPI.Tests\bin\Debug\net6.0\SecretKeyGenerator.deps.json
+C:\Users\Administrator\Documents\GitHub\WeightliftingTrackerGraphQLAPI\WeightliftingTrackerGraphQLAPI.Tests\bin\Debug\net6.0\SecretKeyGenerator.runtimeconfig.json
+C:\Users\Administrator\Documents\GitHub\WeightliftingTrackerGraphQLAPI\WeightliftingTrackerGraphQLAPI.Tests\bin\Debug\net6.0\SecretKeyGenerator.exe
+C:\Users\Administrator\Documents\GitHub\WeightliftingTrackerGraphQLAPI\WeightliftingTrackerGraphQLAPI.Tests\bin\Debug\net6.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+C:\Users\Administrator\Documents\GitHub\WeightliftingTrackerGraphQLAPI\WeightliftingTrackerGraphQLAPI.Tests\bin\Debug\net6.0\Microsoft.IdentityModel.Abstractions.dll
+C:\Users\Administrator\Documents\GitHub\WeightliftingTrackerGraphQLAPI\WeightliftingTrackerGraphQLAPI.Tests\bin\Debug\net6.0\Microsoft.IdentityModel.JsonWebTokens.dll
+C:\Users\Administrator\Documents\GitHub\WeightliftingTrackerGraphQLAPI\WeightliftingTrackerGraphQLAPI.Tests\bin\Debug\net6.0\Microsoft.IdentityModel.Logging.dll
+C:\Users\Administrator\Documents\GitHub\WeightliftingTrackerGraphQLAPI\WeightliftingTrackerGraphQLAPI.Tests\bin\Debug\net6.0\Microsoft.IdentityModel.Protocols.dll
+C:\Users\Administrator\Documents\GitHub\WeightliftingTrackerGraphQLAPI\WeightliftingTrackerGraphQLAPI.Tests\bin\Debug\net6.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+C:\Users\Administrator\Documents\GitHub\WeightliftingTrackerGraphQLAPI\WeightliftingTrackerGraphQLAPI.Tests\bin\Debug\net6.0\Microsoft.IdentityModel.Tokens.dll
+C:\Users\Administrator\Documents\GitHub\WeightliftingTrackerGraphQLAPI\WeightliftingTrackerGraphQLAPI.Tests\bin\Debug\net6.0\System.IdentityModel.Tokens.Jwt.dll
+C:\Users\Administrator\Documents\GitHub\WeightliftingTrackerGraphQLAPI\WeightliftingTrackerGraphQLAPI.Tests\bin\Debug\net6.0\SecretKeyGenerator.dll
+C:\Users\Administrator\Documents\GitHub\WeightliftingTrackerGraphQLAPI\WeightliftingTrackerGraphQLAPI.Tests\bin\Debug\net6.0\SecretKeyGenerator.pdb
