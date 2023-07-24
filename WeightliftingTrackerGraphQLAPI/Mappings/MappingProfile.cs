@@ -8,6 +8,7 @@ namespace WeightliftingTrackerGraphQLAPI.Mappings
         public MappingProfile() { 
         
             CreateMap<Workout, WorkoutDTO>();
+            CreateMap<User, UserDTO>();
         }
     }
 }

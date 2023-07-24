@@ -20,6 +20,7 @@ namespace WeightliftingTrackerGraphQLAPI.Extensions
             if (services == null) throw new ArgumentNullException(nameof(services));
 
             services.AddScoped<WorkoutResolvers>();
+            services.AddScoped<UserResolvers>();
             return services;
         }
 
@@ -28,6 +29,8 @@ namespace WeightliftingTrackerGraphQLAPI.Extensions
             if (services == null) throw new ArgumentNullException(nameof(services));
 
             services.AddScoped<IWorkoutRepository, WorkoutRepository>();
+            services.AddScoped<IUserRepository, UserRepository>();
+
             return services;
         }
     }
