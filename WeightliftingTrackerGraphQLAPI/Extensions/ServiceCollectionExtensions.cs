@@ -21,6 +21,7 @@ namespace WeightliftingTrackerGraphQLAPI.Extensions
 
             services.AddScoped<WorkoutResolvers>();
             services.AddScoped<UserResolvers>();
+            services.AddScoped<NutritionResolvers>();
             return services;
         }
 

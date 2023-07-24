@@ -1,9 +1,9 @@
 ﻿using HotChocolate.Types;
 using WeightliftingTrackerGraphQLAPI.Models;
 
-public class WorkoutType : ObjectType<Workout>
+public class WorkoutType : ObjectType<Nutrition>
 {
-    protected override void Configure(IObjectTypeDescriptor<Workout> descriptor)
+    protected override void Configure(IObjectTypeDescriptor<Nutrition> descriptor)
     {
         descriptor.Field(x => x.Id).Type<IdType>().Description("The unique identifier of the workout.");
         descriptor.Field(x => x.ExerciseName).Type<StringType>().Description("The name of the exercise.");

@@ -16,9 +16,9 @@ namespace WeightliftingTrackerGraphQLAPI.GraphQL
             _userResolvers = userResolvers;
         }
 
-        public async Task<Workout> CreateWorkout(WorkoutInputDTO newWorkout)
+        public async Task<Nutrition> CreateWorkout(WorkoutInputDTO newWorkout)
         {
-            var workout = new Workout
+            var workout = new Nutrition
             {
                 ExerciseName = newWorkout.ExerciseName,
                 Sets = newWorkout.Sets,
@@ -29,14 +29,14 @@ namespace WeightliftingTrackerGraphQLAPI.GraphQL
             return await _workoutResolvers.CreateWorkout(workout);
         }
 
-        public async Task<Workout> DeleteWorkout(int id)
+        public async Task<Nutrition> DeleteWorkout(int id)
         {
             return await _workoutResolvers.DeleteWorkout(id);
         }
 
-        public async Task<Workout> UpdateWorkout(WorkoutUpdateInputDTO updatedWorkoutDto)
+        public async Task<Nutrition> UpdateWorkout(WorkoutUpdateInputDTO updatedWorkoutDto)
         {
-            var workout = new Workout
+            var workout = new Nutrition
             {
                 Id = updatedWorkoutDto.Id,
                 ExerciseName = updatedWorkoutDto.ExerciseName,

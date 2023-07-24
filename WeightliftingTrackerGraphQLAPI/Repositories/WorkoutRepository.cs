@@ -18,7 +18,7 @@ namespace WeightliftingTrackerGraphQLAPI.Repositories
             _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
         }
 
-        public async Task<Workout> CreateWorkout(Workout newWorkout)
+        public async Task<Nutrition> CreateWorkout(Nutrition newWorkout)
         {
             ValidationHelper.CheckIfNull(newWorkout, nameof(newWorkout));
 
@@ -37,7 +37,7 @@ namespace WeightliftingTrackerGraphQLAPI.Repositories
             return newWorkout;
         }
 
-        private MySqlParameter[] CreateParameters(Workout workout)
+        private MySqlParameter[] CreateParameters(Nutrition workout)
         {
             return new MySqlParameter[]
             {
@@ -47,7 +47,7 @@ namespace WeightliftingTrackerGraphQLAPI.Repositories
         new MySqlParameter("@Weight", workout.Weight)
             };
         }
-        private MySqlParameter[] UpdateParameters(Workout workout)
+        private MySqlParameter[] UpdateParameters(Nutrition workout)
         {
             return new MySqlParameter[]
             {
@@ -59,11 +59,11 @@ namespace WeightliftingTrackerGraphQLAPI.Repositories
             };
         }
 
-        private Workout WorkoutFromDataRow(DataRow row)
+        private Nutrition WorkoutFromDataRow(DataRow row)
         {
             DataRowHelper.CheckDataRow(row, "Id", "ExerciseName", "Sets", "Reps", "Weight");
 
-            return new Workout
+            return new Nutrition
             {
                 Id = Convert.ToInt32(row["Id"]),
                 ExerciseName = row["ExerciseName"].ToString(),
@@ -73,7 +73,7 @@ namespace WeightliftingTrackerGraphQLAPI.Repositories
             };
         }
 
-        public async Task<Workout> DeleteWorkout(int workoutId)
+        public async Task<Nutrition> DeleteWorkout(int workoutId)
         {
             MySqlParameter selectParameter = new MySqlParameter("@WorkoutId", workoutId);
             DataTable dt = await _dataAccess.ExecuteQueryAsync(Queries.QuerySelectWorkoutById, new MySqlParameter[] { selectParameter });
@@ -83,7 +83,7 @@ namespace WeightliftingTrackerGraphQLAPI.Repositories
                 throw new Exception($"No workout found with ID: {workoutId}");
             }
 
-            Workout deletedWorkout = new Workout
+            Nutrition deletedWorkout = new Nutrition
             {
                 Id = Convert.ToInt32(dt.Rows[0]["Id"]),
                 ExerciseName = dt.Rows[0]["ExerciseName"].ToString(),
@@ -115,7 +115,7 @@ namespace WeightliftingTrackerGraphQLAPI.Repositories
             .ToList();
         }
 
-        public async Task<Workout> UpdateWorkout(Workout updatedWorkout)
+        public async Task<Nutrition> UpdateWorkout(Nutrition updatedWorkout)
         {
             ValidationHelper.CheckIfNull(updatedWorkout, nameof(updatedWorkout));
 
