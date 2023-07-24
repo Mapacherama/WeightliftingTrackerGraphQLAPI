@@ -78,7 +78,7 @@ namespace WeightliftingTrackerGraphQLAPI.Repositories
 
         public async Task<Nutrition> DeleteNutrition(int nutritionId)
         {
-            MySqlParameter selectParameter = new MySqlParameter("@NutritionId", nutritionId);
+            MySqlParameter selectParameter = new MySqlParameter("@Id", nutritionId);
             DataTable dt = await _dataAccess.ExecuteQueryAsync(Queries.QuerySelectNutritionById, new MySqlParameter[] { selectParameter });
 
             if (dt == null || dt.Rows.Count == 0)
