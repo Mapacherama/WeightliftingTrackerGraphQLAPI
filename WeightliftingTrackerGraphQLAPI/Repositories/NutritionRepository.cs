@@ -22,7 +22,16 @@ namespace WeightliftingTrackerGraphQLAPI.Repositories
         {
             ValidationHelper.CheckIfNull(newNutrition, nameof(newNutrition));
 
-            // Implement your logic here
+            DataTable dt = await _dataAccess.ExecuteQueryAsync(Queries.QuerySelectNutritionByDetails, CreateParameters(newNutrition));
+
+            if (dt != null && dt.Rows.Count > 0)
+            {
+                throw new Exception(ErrorMessages.NutritionDetailsExists);
+            }
+
+            await _dataAccess.ExecuteQueryAsync(Queries.MutationInsertNewNutrition, CreateParameters(newNutrition));
+
+            newNutrition.Id = Convert.ToInt32(await _dataAccess.ExecuteScalarAsync(Queries.QuerySelectLastInsertedId, null));
 
             return newNutrition;
         }
@@ -89,14 +98,36 @@ namespace WeightliftingTrackerGraphQLAPI.Repositories
             return deletedNutrition;
         }
 
-        public Task<IEnumerable<NutritionDTO>> GetNutritions()
+        public async Task<IEnumerable<NutritionDTO>> GetNutritions()
         {
-            throw new NotImplementedException();
+            DataTable dt = await _dataAccess.ExecuteQueryAsync(Queries.QuerySelectAllNutritions, null);
+
+            if (dt == null)
+            {
+                throw new NullReferenceException(ErrorMessages.DataTableIsNull);
+            }
+
+            return dt.AsEnumerable()
+            .Select(row => NutritionFromDataRow(row))
+            .Select(nutrition => _mapper.Map<NutritionDTO>(nutrition))
+            .ToList();
         }
 
-        public Task<Nutrition> UpdateNutrition(Nutrition updatedNutrition)
+        public async Task<Nutrition> UpdateNutrition(Nutrition updatedNutrition)
         {
-            throw new NotImplementedException();
+            ValidationHelper.CheckIfNull(updatedNutrition, nameof(updatedNutrition));
+
+            MySqlParameter selectParameter = new MySqlParameter("@Id", updatedNutrition.Id);
+            DataTable dt = await _dataAccess.ExecuteQueryAsync(Queries.QuerySelectNutritionById, new MySqlParameter[] { selectParameter });
+
+            if (dt == null || dt.Rows.Count == 0)
+            {
+                throw new Exception($"No nutrition found with ID: {updatedNutrition.Id}");
+            }
+
+            await _dataAccess.ExecuteQueryAsync(Queries.MutationUpdateExistingNutrition, UpdateParameters(updatedNutrition));
+
+            return updatedNutrition;
         }
     }
 }
