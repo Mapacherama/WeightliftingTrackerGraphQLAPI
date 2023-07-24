@@ -94,7 +94,7 @@ namespace WeightliftingTrackerGraphQLAPI.Repositories
 
             
             MySqlParameter deleteParameter = new MySqlParameter("@WorkoutId", workoutId);
-            await _dataAccess.ExecuteQueryAsync(Queries.MutationdeleteWorkout, new MySqlParameter[] { deleteParameter });
+            await _dataAccess.ExecuteQueryAsync(Queries.MutationDeleteWorkout, new MySqlParameter[] { deleteParameter });
 
             return deletedWorkout;
         }
