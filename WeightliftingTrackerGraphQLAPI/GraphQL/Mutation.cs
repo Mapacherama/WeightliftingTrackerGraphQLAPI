@@ -34,6 +34,7 @@ namespace WeightliftingTrackerGraphQLAPI.GraphQL
         {
             var nutrition = new Nutrition
             {
+                FoodName = newNutrition.FoodName,
                 Calories = newNutrition.Calories,
                 Protein = newNutrition.Protein,
                 Carbohydrates = newNutrition.Carbohydrates,
@@ -82,6 +83,7 @@ namespace WeightliftingTrackerGraphQLAPI.GraphQL
             var nutrition = new Nutrition
             {
                 Id = updatedNutritionDto.Id,
+                FoodName = updatedNutritionDto.FoodName,
                 Calories = updatedNutritionDto.Calories,
                 Protein = updatedNutritionDto.Protein,
                 Carbohydrates = updatedNutritionDto.Carbohydrates,
