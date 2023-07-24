@@ -40,6 +40,7 @@ namespace WeightliftingTrackerGraphQLAPI.Repositories
         {
             return new MySqlParameter[]
             {
+                new MySqlParameter("@Name", nutrition.FoodName),
                 new MySqlParameter("@Calories", nutrition.Calories),
                 new MySqlParameter("@Protein", nutrition.Protein),
                 new MySqlParameter("@Carbohydrates", nutrition.Carbohydrates),
@@ -52,6 +53,7 @@ namespace WeightliftingTrackerGraphQLAPI.Repositories
             return new MySqlParameter[]
             {
                 new MySqlParameter("@Id", nutrition.Id),
+                new MySqlParameter("@Name", nutrition.FoodName),
                 new MySqlParameter("@Calories", nutrition.Calories),
                 new MySqlParameter("@Protein", nutrition.Protein),
                 new MySqlParameter("@Carbohydrates", nutrition.Carbohydrates),
@@ -61,11 +63,12 @@ namespace WeightliftingTrackerGraphQLAPI.Repositories
 
         private Nutrition NutritionFromDataRow(DataRow row)
         {
-            DataRowHelper.CheckDataRow(row, "Id", "Calories", "Protein", "Carbohydrates", "Fats");
+            DataRowHelper.CheckDataRow(row, "Id", "Name", "Calories", "Protein", "Carbohydrates", "Fats");
 
             return new Nutrition
             {
                 Id = Convert.ToInt32(row["Id"]),
+                FoodName = row["FoodName"].ToString(),
                 Calories = Convert.ToSingle(row["Calories"]),
                 Protein = Convert.ToSingle(row["Protein"]),
                 Carbohydrates = Convert.ToSingle(row["Carbohydrates"]),
@@ -86,6 +89,7 @@ namespace WeightliftingTrackerGraphQLAPI.Repositories
             Nutrition deletedNutrition = new Nutrition
             {
                 Id = Convert.ToInt32(dt.Rows[0]["Id"]),
+                FoodName = dt.Rows[0]["ExerciseName"].ToString(),
                 Calories = Convert.ToSingle(dt.Rows[0]["Calories"]),
                 Protein = Convert.ToSingle(dt.Rows[0]["Protein"]),
                 Carbohydrates = Convert.ToSingle(dt.Rows[0]["Carbohydrates"]),
