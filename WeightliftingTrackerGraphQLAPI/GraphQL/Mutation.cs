@@ -2,7 +2,6 @@
 using WeightliftingTrackerGraphQLAPI.Models;
 using WeightliftingTrackerGraphQLAPI.Resolvers;
 using WeightliftingTrackerGraphQLAPI.GraphQL.Types;
-using WeightliftingTrackerGraphQLAPI.Repositories;
 
 namespace WeightliftingTrackerGraphQLAPI.GraphQL
 {
@@ -27,6 +26,19 @@ namespace WeightliftingTrackerGraphQLAPI.GraphQL
             };
 
             return await _workoutResolvers.CreateWorkout(workout);
+        }
+
+        public async Task<Nutrition> CreateNutrition(NutritionInputDTO newNutrition)
+        {
+            var nutrition = new Nutrition
+            {
+                Calories = newNutrition.Calories,
+                Protein = newNutrition.Protein,
+                Carbohydrates = newNutrition.Carbohydrates,
+                Fats = newNutrition.Fats
+            };
+
+            return await _nutritionResolvers.CreateNutrition(nutrition); // Assuming _nutritionResolvers is the service handling the creation of Nutrition records.
         }
 
         public async Task<Workout> DeleteWorkout(int id)
