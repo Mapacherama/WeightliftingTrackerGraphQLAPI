@@ -3,9 +3,9 @@ using WeightliftingTrackerGraphQLAPI.Models;
 
 namespace WeightliftingTrackerGraphQLAPI.GraphQL.Types
 {
-    public class WorkoutInputType : InputObjectType<Nutrition>
+    public class WorkoutInputType : InputObjectType<Workout>
     {
-        protected override void Configure(IInputObjectTypeDescriptor<Nutrition> descriptor)
+        protected override void Configure(IInputObjectTypeDescriptor<Workout> descriptor)
         {
             descriptor.Field(w => w.ExerciseName).Type<NonNullType<StringType>>();
             descriptor.Field(w => w.Sets).Type<NonNullType<IntType>>();

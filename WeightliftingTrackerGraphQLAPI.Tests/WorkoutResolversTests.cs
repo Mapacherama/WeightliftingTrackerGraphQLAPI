@@ -79,10 +79,10 @@ namespace WeightliftingTrackerGraphQLAPI.Tests
             // Arrange
             _mockDataAccess.Setup(d => d.ExecuteQueryAsync(It.IsAny<string>(), It.IsAny<MySqlParameter[]>()));
             _mockDataAccess.Setup(d => d.ExecuteScalarAsync(It.IsAny<string>(), It.IsAny<MySqlParameter[]>())).ReturnsAsync(_testWorkout.Id);
-            _mockWorkoutRepository.Setup(r => r.CreateWorkout(It.IsAny<Nutrition>()))
-       .ReturnsAsync((Nutrition newWorkout) => newWorkout);
+            _mockWorkoutRepository.Setup(r => r.CreateWorkout(It.IsAny<Workout>()))
+       .ReturnsAsync((Workout newWorkout) => newWorkout);
 
-            var workout = new Nutrition
+            var workout = new Workout
             {
                 Id = _testWorkout.Id,
                 ExerciseName = _testWorkout.ExerciseName,
@@ -96,7 +96,7 @@ namespace WeightliftingTrackerGraphQLAPI.Tests
 
             // Assert
             Assert.IsNotNull(result);
-            Assert.IsInstanceOf<Nutrition>(result);
+            Assert.IsInstanceOf<Workout>(result);
             Assert.AreEqual(_testWorkout.Id, result.Id);
             Assert.AreEqual(_testWorkout.ExerciseName, result.ExerciseName);
             Assert.AreEqual(_testWorkout.Sets, result.Sets);
@@ -111,7 +111,7 @@ namespace WeightliftingTrackerGraphQLAPI.Tests
             _mockDataAccess.Setup(d => d.ExecuteQueryAsync(It.IsAny<string>(), It.IsAny<MySqlParameter[]>()));
             _mockDataAccess.Setup(d => d.ExecuteScalarAsync(It.IsAny<string>(), It.IsAny<MySqlParameter[]>()));
 
-            _mockWorkoutRepository.Setup(r => r.CreateWorkout(It.IsAny<Nutrition>()))
+            _mockWorkoutRepository.Setup(r => r.CreateWorkout(It.IsAny<Workout>()))
     .ThrowsAsync(new ArgumentNullException());
 
             Assert.ThrowsAsync<ArgumentNullException>(async () => await _workoutResolvers.CreateWorkout(null));
@@ -142,7 +142,7 @@ namespace WeightliftingTrackerGraphQLAPI.Tests
             row["Weight"] = _testWorkout.Weight;
             dt.Rows.Add(row);
 
-            var workout = new Nutrition
+            var workout = new Workout
             {
                 Id = _testWorkout.Id,
                 ExerciseName = _testWorkout.ExerciseName,
@@ -152,13 +152,13 @@ namespace WeightliftingTrackerGraphQLAPI.Tests
             };
 
             _mockDataAccess.Setup(d => d.ExecuteQueryAsync(It.IsAny<string>(), It.IsAny<MySqlParameter[]>())).ReturnsAsync(dt);
-            _mockWorkoutRepository.Setup(r => r.UpdateWorkout(It.IsAny<Nutrition>()))
-            .ReturnsAsync((Nutrition newWorkout) => newWorkout);
+            _mockWorkoutRepository.Setup(r => r.UpdateWorkout(It.IsAny<Workout>()))
+            .ReturnsAsync((Workout newWorkout) => newWorkout);
 
             var result = await _workoutResolvers.UpdateWorkout(workout);
 
             Assert.IsNotNull(result);
-            Assert.IsInstanceOf<Nutrition>(result);
+            Assert.IsInstanceOf<Workout>(result);
             Assert.AreEqual(_testWorkout.Id, result.Id);
             Assert.AreEqual(_testWorkout.ExerciseName, result.ExerciseName);
             Assert.AreEqual(_testWorkout.Sets, result.Sets);
@@ -172,7 +172,7 @@ namespace WeightliftingTrackerGraphQLAPI.Tests
             
             _mockDataAccess.Setup(d => d.ExecuteQueryAsync(It.IsAny<string>(), It.IsAny<MySqlParameter[]>()));
 
-            _mockWorkoutRepository.Setup(r => r.UpdateWorkout(It.IsAny<Nutrition>()))
+            _mockWorkoutRepository.Setup(r => r.UpdateWorkout(It.IsAny<Workout>()))
     .ThrowsAsync(new ArgumentNullException());
 
             Assert.ThrowsAsync<ArgumentNullException>(() => _workoutResolvers.UpdateWorkout(null));
@@ -183,9 +183,9 @@ namespace WeightliftingTrackerGraphQLAPI.Tests
         public async Task UpdateWorkout_ThrowsException_When_WorkoutDoesNotExist()
         {
             _mockDataAccess.Setup(d => d.ExecuteQueryAsync(It.IsAny<string>(), It.IsAny<MySqlParameter[]>())).ReturnsAsync((DataTable)null);
-            _mockWorkoutRepository.Setup(r => r.UpdateWorkout(It.IsAny<Nutrition>())).ThrowsAsync(new Exception());
+            _mockWorkoutRepository.Setup(r => r.UpdateWorkout(It.IsAny<Workout>())).ThrowsAsync(new Exception());
 
-            var workout = new Nutrition
+            var workout = new Workout
             {
                 Id = _testWorkout.Id,
                 ExerciseName = _testWorkout.ExerciseName,

@@ -1,12 +1,28 @@
-﻿using WeightliftingTrackerGraphQLAPI.Models;
+﻿using AutoMapper;
+using WeightliftingTrackerGraphQLAPI.Data;
+using WeightliftingTrackerGraphQLAPI.Helpers;
+using WeightliftingTrackerGraphQLAPI.Models;
 
 namespace WeightliftingTrackerGraphQLAPI.Repositories
 {
     public class NutritionRepository : INutritionRepository
     {
-        public Task<Nutrition> CreateNutrition(Nutrition newNutrition)
+        private readonly IMySqlDataAccess _dataAccess;
+        private readonly IMapper _mapper;
+
+        public NutritionRepository(IMySqlDataAccess dataAccess, IMapper mapper)
         {
-            throw new NotImplementedException();
+            _dataAccess = dataAccess;
+            _mapper = mapper;
+        }
+
+        public async Task<Nutrition> CreateNutrition(Nutrition newNutrition)
+        {
+            ValidationHelper.CheckIfNull(newNutrition, nameof(newNutrition));
+
+            // Implement your logic here
+
+            return newNutrition;
         }
 
         public Task<Nutrition> DeleteNutrition(int nutritionId)
