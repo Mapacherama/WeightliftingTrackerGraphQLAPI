@@ -9,10 +9,12 @@ namespace WeightliftingTrackerGraphQLAPI.GraphQL
     {
         private readonly WorkoutResolvers _workoutResolvers;
         private readonly UserResolvers _userResolvers;
-        public Mutation(WorkoutResolvers workoutResolvers, UserResolvers userResolvers)
+        private readonly NutritionResolvers _nutritionResolvers;
+        public Mutation(WorkoutResolvers workoutResolvers, UserResolvers userResolvers, NutritionResolvers nutritionResolvers)
         {
             _workoutResolvers = workoutResolvers;
             _userResolvers = userResolvers;
+            _nutritionResolvers = nutritionResolvers;
         }
 
         public async Task<Workout> CreateWorkout(WorkoutInputDTO newWorkout)
@@ -40,10 +42,25 @@ namespace WeightliftingTrackerGraphQLAPI.GraphQL
 
             return await _nutritionResolvers.CreateNutrition(nutrition); // Assuming _nutritionResolvers is the service handling the creation of Nutrition records.
         }
+        public async Task<User> CreateUser(UserInputDTO newUser)
+        {
+            var user = new User
+            {
+                Username = newUser.Username,
+                Password = newUser.Password,
+            };
+
+            return await _userResolvers.CreateUser(user);
+        }
 
         public async Task<Workout> DeleteWorkout(int id)
         {
             return await _workoutResolvers.DeleteWorkout(id);
+        }
+
+        public async Task<Nutrition> DeleteNutrition(int id)
+        {
+            return await _nutritionResolvers.DeleteNutrition(id);
         }
 
         public async Task<Workout> UpdateWorkout(WorkoutUpdateInputDTO updatedWorkoutDto)
@@ -60,15 +77,19 @@ namespace WeightliftingTrackerGraphQLAPI.GraphQL
             return await _workoutResolvers.UpdateWorkout(workout);
         }
 
-        public async Task<User> CreateUser(UserInputDTO newUser)
+        public async Task<Nutrition> UpdateNutrition(NutritionUpdateInputDTO updatedNutritionDto)
         {
-            var user = new User
+            var nutrition = new Nutrition
             {
-                Username = newUser.Username,
-                Password = newUser.Password,
+                Id = updatedNutritionDto.Id,
+                Calories = updatedNutritionDto.Calories,
+                Protein = updatedNutritionDto.Protein,
+                Carbohydrates = updatedNutritionDto.Carbohydrates,
+                Fats = updatedNutritionDto.Fats
             };
 
-            return await _userResolvers.CreateUser(user);
+            return await _nutritionResolvers.UpdateNutrition(nutrition);
         }
+
     }
 }
