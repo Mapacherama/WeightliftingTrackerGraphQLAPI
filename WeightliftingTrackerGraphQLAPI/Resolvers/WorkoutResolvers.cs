@@ -37,6 +37,5 @@ namespace WeightliftingTrackerGraphQLAPI.Resolvers
             return await _workoutRepository.UpdateWorkout(updatedWorkout);
         }
 
-
     }
 }

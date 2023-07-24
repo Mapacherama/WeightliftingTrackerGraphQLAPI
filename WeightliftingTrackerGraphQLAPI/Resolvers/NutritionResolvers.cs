@@ -1,19 +1,32 @@
-﻿using AutoMapper;
+﻿using WeightliftingTrackerGraphQLAPI.Models;
 using WeightliftingTrackerGraphQLAPI.Repositories;
 
-namespace WeightliftingTrackerGraphQLAPI.Resolvers
+public class NutritionResolvers
 {
-    public class NutritionResolvers
+    private readonly INutritionRepository _nutritionRepository;
+
+    public NutritionResolvers(INutritionRepository nutritionRepository)
     {
-        private readonly INutritionRepository _nutritionRepository;
-        private readonly IMapper _mapper;
+        _nutritionRepository = nutritionRepository;
+    }
 
-        public NutritionResolvers(INutritionRepository nutritionRepository, IMapper mapper)
-        {
-            _nutritionRepository = nutritionRepository;
-            _mapper = mapper;
-        }
+    public async Task<IEnumerable<NutritionDTO>> GetNutritions()
+    {
+        return await _nutritionRepository.GetNutritions();
+    }
 
-        // TODO CRUD Functionality.
+    public async Task<Nutrition> CreateNutrition(Nutrition newNutrition)
+    {
+        return await _nutritionRepository.CreateNutrition(newNutrition);
+    }
+
+    public async Task<Nutrition> DeleteNutrition(int id)
+    {
+        return await _nutritionRepository.DeleteNutrition(id);
+    }
+
+    public async Task<Nutrition> UpdateNutrition(Nutrition updatedNutrition)
+    {
+        return await _nutritionRepository.UpdateNutrition(updatedNutrition);
     }
 }

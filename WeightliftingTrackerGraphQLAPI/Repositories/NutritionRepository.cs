@@ -30,7 +30,7 @@ namespace WeightliftingTrackerGraphQLAPI.Repositories
             throw new NotImplementedException();
         }
 
-        public Task<IEnumerable<NutritionDTO>> GetWorkouts()
+        public Task<IEnumerable<NutritionDTO>> GetNutritions()
         {
             throw new NotImplementedException();
         }
