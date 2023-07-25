@@ -80,17 +80,16 @@ namespace WeightliftingTrackerGraphQLAPI.GraphQL
 
         public async Task<Nutrition> UpdateNutrition(NutritionUpdateInputDTO updatedNutritionDto)
         {
-            // Fetch the existing Nutrition object from the database
             var nutrition = await _nutritionResolvers.getNutritionById(updatedNutritionDto.Id);
 
-            // Update only the properties that are not null in the updatedNutritionDto object
+            
             nutrition.FoodName = updatedNutritionDto.FoodName ?? nutrition.FoodName;
             nutrition.Calories = updatedNutritionDto.Calories ?? nutrition.Calories;
             nutrition.Protein = updatedNutritionDto.Protein ?? nutrition.Protein;
             nutrition.Carbohydrates = updatedNutritionDto.Carbohydrates ?? nutrition.Carbohydrates;
             nutrition.Fats = updatedNutritionDto.Fats ?? nutrition.Fats;
 
-            // Pass the updated Nutrition object to the UpdateNutrition method
+            
             return await _nutritionResolvers.UpdateNutrition(nutrition);
         }
 
