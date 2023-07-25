@@ -35,28 +35,8 @@ public class NutritionResolvers
         return await _nutritionRepository.UpdateNutrition(updatedNutrition);
     }
 
-    public async Task<Nutrition> GetNutritionById(int id)
+    public async Task<Nutrition> getNutritionById(int id)
     {
-        MySqlParameter selectParameter = new MySqlParameter("@Id", id);
-        DataTable dt = await _dataAccess.ExecuteQueryAsync(Queries.QuerySelectNutritionById, new MySqlParameter[] { selectParameter });
-
-        if (dt == null || dt.Rows.Count == 0)
-        {
-            throw new Exception($"No nutrition found with ID: {id}");
-        }
-
-        // Convert the first row of the DataTable to a Nutrition object
-        var row = dt.Rows[0];
-        var nutrition = new Nutrition
-        {
-            Id = Convert.ToInt32(row["Id"]),
-            FoodName = row["FoodName"] as string,
-            Calories = Convert.ToSingle(row["Calories"]),
-            Protein = Convert.ToSingle(row["Protein"]),
-            Carbohydrates = Convert.ToSingle(row["Carbohydrates"]),
-            Fats = Convert.ToSingle(row["Fats"])
-        };
-
-        return nutrition;
+        return await _nutritionRepository.GetNutritionById(id);
     }
 }
