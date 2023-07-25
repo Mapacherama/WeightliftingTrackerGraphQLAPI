@@ -1,18 +1,13 @@
-﻿using MySql.Data.MySqlClient;
-using System.Data;
-using WeightliftingTrackerGraphQLAPI.Data;
-using WeightliftingTrackerGraphQLAPI.Models;
+﻿using WeightliftingTrackerGraphQLAPI.Models;
 using WeightliftingTrackerGraphQLAPI.Repositories;
 
 public class NutritionResolvers
 {
     private readonly INutritionRepository _nutritionRepository;
-    private readonly IMySqlDataAccess _dataAccess;
 
-    public NutritionResolvers(INutritionRepository nutritionRepository, IMySqlDataAccess dataAccess)
+    public NutritionResolvers(INutritionRepository nutritionRepository)
     {
         _nutritionRepository = nutritionRepository;
-        _dataAccess = dataAccess;
     }
 
     public async Task<IEnumerable<NutritionDTO>> GetNutritions()
