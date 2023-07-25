@@ -23,7 +23,7 @@ builder.Services.AddControllers();
 builder.Services.AddGraphQLServer()
     .AddQueryType<Query>()
     .AddMutationType<Mutation>()
-    .AddType<WorkoutInputType>(); ;
+    .AddType<WorkoutInputType>(); 
 
 var app = builder.Build();
 
@@ -46,6 +46,7 @@ app.UseEndpoints(endpoints =>
 {
     endpoints.MapControllers();
     endpoints.MapGraphQL();
+    endpoints.MapGraphQLVoyager();
 });
 
 await app.RunAsync();

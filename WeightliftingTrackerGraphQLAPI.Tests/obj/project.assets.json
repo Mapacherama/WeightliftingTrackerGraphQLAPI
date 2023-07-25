@@ -60,6 +60,22 @@
           }
         }
       },
+      "GraphQL.Server.Ui.Voyager/7.5.0": {
+        "type": "package",
+        "compile": {
+          "lib/netcoreapp3.1/GraphQL.Server.Ui.Voyager.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/netcoreapp3.1/GraphQL.Server.Ui.Voyager.dll": {
+            "related": ".xml"
+          }
+        },
+        "frameworkReferences": [
+          "Microsoft.AspNetCore.App"
+        ]
+      },
       "GreenDonut/13.3.1": {
         "type": "package",
         "dependencies": {
@@ -2183,6 +2199,7 @@
         "dependencies": {
           "AutoMapper": "12.0.1",
           "AutoMapper.Extensions.Microsoft.DependencyInjection": "12.0.1",
+          "GraphQL.Server.Ui.Voyager": "7.5.0",
           "HotChocolate.AspNetCore": "13.3.1",
           "Microsoft.AspNetCore.Authentication.JwtBearer": "6.0.20",
           "MySql.Data": "8.0.33",
@@ -2292,6 +2309,23 @@
         "lib/netstandard2.0/Google.Protobuf.dll",
         "lib/netstandard2.0/Google.Protobuf.pdb",
         "lib/netstandard2.0/Google.Protobuf.xml"
+      ]
+    },
+    "GraphQL.Server.Ui.Voyager/7.5.0": {
+      "sha512": "nKmG9l33RO1tvFMlTfqaSjvL+QxgKGXZAlY48CZwZgOUzlRjMxag9SCJ/QmLddxPd3fZVY2XuN+Ynyf0t9YLSw==",
+      "type": "package",
+      "path": "graphql.server.ui.voyager/7.5.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "README.md",
+        "graphql.server.ui.voyager.7.5.0.nupkg.sha512",
+        "graphql.server.ui.voyager.nuspec",
+        "lib/netcoreapp3.1/GraphQL.Server.Ui.Voyager.dll",
+        "lib/netcoreapp3.1/GraphQL.Server.Ui.Voyager.xml",
+        "lib/netstandard2.0/GraphQL.Server.Ui.Voyager.dll",
+        "lib/netstandard2.0/GraphQL.Server.Ui.Voyager.xml",
+        "logo.64x64.png"
       ]
     },
     "GreenDonut/13.3.1": {

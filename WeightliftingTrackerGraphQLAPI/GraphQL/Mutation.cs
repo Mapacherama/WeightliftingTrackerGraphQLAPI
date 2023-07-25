@@ -2,7 +2,6 @@
 using WeightliftingTrackerGraphQLAPI.Models;
 using WeightliftingTrackerGraphQLAPI.Resolvers;
 using WeightliftingTrackerGraphQLAPI.GraphQL.Types;
-using WeightliftingTrackerGraphQLAPI.Repositories;
 
 namespace WeightliftingTrackerGraphQLAPI.GraphQL
 {
@@ -10,10 +9,12 @@ namespace WeightliftingTrackerGraphQLAPI.GraphQL
     {
         private readonly WorkoutResolvers _workoutResolvers;
         private readonly UserResolvers _userResolvers;
-        public Mutation(WorkoutResolvers workoutResolvers, UserResolvers userResolvers)
+        private readonly NutritionResolvers _nutritionResolvers;
+        public Mutation(WorkoutResolvers workoutResolvers, UserResolvers userResolvers, NutritionResolvers nutritionResolvers)
         {
             _workoutResolvers = workoutResolvers;
             _userResolvers = userResolvers;
+            _nutritionResolvers = nutritionResolvers;
         }
 
         public async Task<Workout> CreateWorkout(WorkoutInputDTO newWorkout)
@@ -29,9 +30,38 @@ namespace WeightliftingTrackerGraphQLAPI.GraphQL
             return await _workoutResolvers.CreateWorkout(workout);
         }
 
+        public async Task<Nutrition> CreateNutrition(NutritionInputDTO newNutrition)
+        {
+            var nutrition = new Nutrition
+            {
+                FoodName = newNutrition.FoodName,
+                Calories = newNutrition.Calories,
+                Protein = newNutrition.Protein,
+                Carbohydrates = newNutrition.Carbohydrates,
+                Fats = newNutrition.Fats
+            };
+
+            return await _nutritionResolvers.CreateNutrition(nutrition); // Assuming _nutritionResolvers is the service handling the creation of Nutrition records.
+        }
+        public async Task<User> CreateUser(UserInputDTO newUser)
+        {
+            var user = new User
+            {
+                Username = newUser.Username,
+                Password = newUser.Password,
+            };
+
+            return await _userResolvers.CreateUser(user);
+        }
+
         public async Task<Workout> DeleteWorkout(int id)
         {
             return await _workoutResolvers.DeleteWorkout(id);
+        }
+
+        public async Task<Nutrition> DeleteNutrition(int id)
+        {
+            return await _nutritionResolvers.DeleteNutrition(id);
         }
 
         public async Task<Workout> UpdateWorkout(WorkoutUpdateInputDTO updatedWorkoutDto)
@@ -48,15 +78,20 @@ namespace WeightliftingTrackerGraphQLAPI.GraphQL
             return await _workoutResolvers.UpdateWorkout(workout);
         }
 
-        public async Task<User> CreateUser(UserInputDTO newUser)
+        public async Task<Nutrition> UpdateNutrition(NutritionUpdateInputDTO updatedNutritionDto)
         {
-            var user = new User
-            {
-                Username = newUser.Username,
-                Password = newUser.Password,
-            };
+            var nutrition = await _nutritionResolvers.getNutritionById(updatedNutritionDto.Id);
 
-            return await _userResolvers.CreateUser(user);
+            
+            nutrition.FoodName = updatedNutritionDto.FoodName ?? nutrition.FoodName;
+            nutrition.Calories = updatedNutritionDto.Calories ?? nutrition.Calories;
+            nutrition.Protein = updatedNutritionDto.Protein ?? nutrition.Protein;
+            nutrition.Carbohydrates = updatedNutritionDto.Carbohydrates ?? nutrition.Carbohydrates;
+            nutrition.Fats = updatedNutritionDto.Fats ?? nutrition.Fats;
+
+            
+            return await _nutritionResolvers.UpdateNutrition(nutrition);
         }
+
     }
 }

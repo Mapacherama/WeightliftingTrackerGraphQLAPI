@@ -1,7 +1,4 @@
-﻿using MySql.Data.MySqlClient;
-using System.Data;
-using WeightliftingTrackerGraphQLAPI.Data;
-using WeightliftingTrackerGraphQLAPI.Models;
+﻿using WeightliftingTrackerGraphQLAPI.Models;
 using WeightliftingTrackerGraphQLAPI.Repositories;
 
 namespace WeightliftingTrackerGraphQLAPI.Resolvers
@@ -36,7 +33,6 @@ namespace WeightliftingTrackerGraphQLAPI.Resolvers
         {
             return await _workoutRepository.UpdateWorkout(updatedWorkout);
         }
-
 
     }
 }

@@ -174,3 +174,4 @@ C:\Users\Administrator\Documents\GitHub\WeightliftingTrackerGraphQLAPI\Weightlif
 C:\Users\Administrator\Documents\GitHub\WeightliftingTrackerGraphQLAPI\WeightliftingTrackerGraphQLAPI.Tests\bin\Debug\net6.0\System.IdentityModel.Tokens.Jwt.dll
 C:\Users\Administrator\Documents\GitHub\WeightliftingTrackerGraphQLAPI\WeightliftingTrackerGraphQLAPI.Tests\bin\Debug\net6.0\SecretKeyGenerator.dll
 C:\Users\Administrator\Documents\GitHub\WeightliftingTrackerGraphQLAPI\WeightliftingTrackerGraphQLAPI.Tests\bin\Debug\net6.0\SecretKeyGenerator.pdb
+C:\Users\Administrator\Documents\GitHub\WeightliftingTrackerGraphQLAPI\WeightliftingTrackerGraphQLAPI.Tests\bin\Debug\net6.0\GraphQL.Server.Ui.Voyager.dll
