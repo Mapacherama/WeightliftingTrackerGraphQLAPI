@@ -46,6 +46,7 @@ app.UseEndpoints(endpoints =>
 {
     endpoints.MapControllers();
     endpoints.MapGraphQL();
+    endpoints.MapGraphQLVoyager();
 });
 
 await app.RunAsync();

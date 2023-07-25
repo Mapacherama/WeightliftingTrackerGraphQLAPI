@@ -23,7 +23,7 @@ namespace WeightliftingTrackerGraphQLAPI.Tests
             _mockDataAccess = new Mock<IMySqlDataAccess>();
             _mockNutritionRepository = new Mock<INutritionRepository>();
 
-            _nutritionResolvers = new NutritionResolvers(_mockNutritionRepository.Object);
+            // _nutritionResolvers = new NutritionResolvers(_mockNutritionRepository.Object);
 
             _testNutrition = new NutritionDTO
             {
