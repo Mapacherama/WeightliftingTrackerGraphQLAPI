@@ -10,6 +10,7 @@ namespace WeightliftingTrackerGraphQLAPI.GraphQL.Types
             descriptor.Field(x => x.Id).Type<IdType>().Description("The unique identifier of the user.");
             descriptor.Field(x => x.Username).Type<StringType>().Description("The username of the user.");
             descriptor.Field(x => x.Password).Type<StringType>().Description("The password the user uses to login.");
+            descriptor.Field(x => x.HydrationRecord).Type<ListType<HydrationType>>().Description("Reference data to the hydration the user drank daily");
         }
     }
 }

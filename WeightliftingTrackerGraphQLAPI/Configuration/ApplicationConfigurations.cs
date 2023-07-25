@@ -23,7 +23,6 @@ namespace WeightliftingTrackerGraphQLAPI.Configuration
                         .AllowCredentials());
             });
         }
-
         public static void ConfigureAuthentication(this IServiceCollection services, IConfiguration configuration)
         {
             var jwtSettings = configuration.GetSection("JwtSettings").Get<JwtSettings>();
