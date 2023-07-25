@@ -1,10 +1,9 @@
-﻿using NUnit.Framework;
-using Moq;
+﻿using Moq;
 using MySql.Data.MySqlClient;
+using NUnit.Framework;
+using System.Data;
 using WeightliftingTrackerGraphQLAPI.Data;
 using WeightliftingTrackerGraphQLAPI.Models;
-using WeightliftingTrackerGraphQLAPI.Resolvers;
-using System.Data;
 using WeightliftingTrackerGraphQLAPI.Repositories;
 
 namespace WeightliftingTrackerGraphQLAPI.Tests
