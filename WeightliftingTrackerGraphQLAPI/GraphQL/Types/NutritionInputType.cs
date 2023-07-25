@@ -1,17 +1,13 @@
-﻿using HotChocolate.Types;
-using WeightliftingTrackerGraphQLAPI.Models;
+﻿using WeightliftingTrackerGraphQLAPI.Models;
 
-namespace WeightliftingTrackerGraphQLAPI.GraphQL.Types
+public class NutritionInputType : InputObjectType<Nutrition>
 {
-    public class NutritionInputType : InputObjectType<Nutrition>
+    protected override void Configure(IInputObjectTypeDescriptor<Nutrition> descriptor)
     {
-        protected override void Configure(IInputObjectTypeDescriptor<Nutrition> descriptor)
-        {
-            descriptor.Field(n => n.FoodName).Type<NonNullType<StringType>>();
-            descriptor.Field(n => n.Calories).Type<NonNullType<FloatType>>();
-            descriptor.Field(n => n.Protein).Type<NonNullType<FloatType>>();
-            descriptor.Field(n => n.Carbohydrates).Type<NonNullType<FloatType>>();
-            descriptor.Field(n => n.Fats).Type<NonNullType<FloatType>>();
-        }
+        descriptor.Field(n => n.FoodName).Type<StringType>();
+        descriptor.Field(n => n.Calories).Type<FloatType>();
+        descriptor.Field(n => n.Protein).Type<FloatType>();
+        descriptor.Field(n => n.Carbohydrates).Type<FloatType>();
+        descriptor.Field(n => n.Fats).Type<FloatType>();
     }
 }

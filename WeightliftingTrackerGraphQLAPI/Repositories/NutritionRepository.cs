@@ -129,7 +129,30 @@ namespace WeightliftingTrackerGraphQLAPI.Repositories
                 throw new Exception($"No nutrition found with ID: {updatedNutrition.Id}");
             }
 
-            await _dataAccess.ExecuteQueryAsync(Queries.MutationUpdateExistingNutrition, UpdateParameters(updatedNutrition));
+            // Start constructing the update query
+            string updateQuery = "UPDATE Nutrition SET ";
+
+            // List to hold the parameters for the update query
+            List<MySqlParameter> updateParameters = new List<MySqlParameter>();
+
+            // Check each property of updatedNutrition and add to the query and parameters as needed
+            if (updatedNutrition.Calories != null)
+            {
+                updateQuery += "Calories = @Calories, ";
+                updateParameters.Add(new MySqlParameter("@Calories", updatedNutrition.Calories));
+            }
+            if (updatedNutrition.Protein != null)
+            {
+                updateQuery += "Protein = @Protein, ";
+                updateParameters.Add(new MySqlParameter("@Protein", updatedNutrition.Protein));
+            }
+            // Repeat for other properties...
+
+            // Remove the trailing comma and space, and add the WHERE clause
+            updateQuery = updateQuery.TrimEnd(',', ' ') + " WHERE Id = @Id;";
+            updateParameters.Add(new MySqlParameter("@Id", updatedNutrition.Id));
+
+            await _dataAccess.ExecuteQueryAsync(updateQuery, updateParameters.ToArray());
 
             return updatedNutrition;
         }

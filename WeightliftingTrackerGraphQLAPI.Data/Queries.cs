@@ -11,7 +11,6 @@
         public const string MutationInsertNewWorkout = "INSERT INTO Workout (ExerciseName, Sets, Reps, Weight) VALUES (@ExerciseName, @Sets, @Reps, @Weight);";
         public const string MutationInsertNewNutrition = "INSERT INTO Nutrition (FoodName, Calories, Protein, Carbohydrates, Fats) VALUES (@FoodName, @Calories, @Protein, @Carbohydrates, @Fats);";
         public const string MutationUpdateExistingWorkout = "UPDATE Workout SET ExerciseName = @ExerciseName, Sets = @Sets, Reps = @Reps, Weight = @Weight WHERE Id = @Id;";
-        public const string MutationUpdateExistingNutrition = "UPDATE Nutrition SET Calories = @Calories, Protein = @Protein, Carbohydrates = @Carbohydrates, Fats = @Fats WHERE Id = @Id;";
         public const string MutationDeleteWorkout = "DELETE FROM Workout WHERE Id = @WorkoutId;";
         public const string MutationDeleteNutrition = "DELETE FROM Nutrition WHERE Id = @NutritionId;";
         public const string QuerySelectLastInsertedId = "SELECT LAST_INSERT_ID();";
